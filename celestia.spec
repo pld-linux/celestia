@@ -14,6 +14,7 @@ Source2:	%{name}-solar-%{version}.tar.gz
 # Source2-md5:	eabbb0718956528245de3573ae7f8bd7
 Patch0:		%{name}-gcc34.patch
 Patch1:		%{name}-lua50.patch
+Patch2:		%{name}-ati.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -286,6 +287,7 @@ Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 %setup -q -a2 -n %{name}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 echo "You can remove this package safely." > PLACEHOLDER-TASK-DEFAULT
 
