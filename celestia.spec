@@ -1,20 +1,19 @@
+%define		_snap	20050111
 Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.3.2
-Release:	1
+Release:	1.%{_snap}.1
 License:	GPL
 Group:		X11/Applications/Science
-Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-# Source0-md5:	0aaf86592a8989a0576e34c1f4cb3c2a
-# Source0-size:	18091458
-#Source0:	%{name}-%{_snap}.tar.bz2
+#Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
+Source0:	%{name}-%{_snap}.tar.bz2
+# Source0-md5:	38bd909c68c1cff31429671edaf30352
 Source1:	%{name}.desktop
 Source2:	http://ep09.pld-linux.org/~havner/%{name}-solar-%{version}.tar.gz
 # Source2-md5:	1c4afc290816945250755d400852d04b
-# Source2-size:	6688
-Patch0:		%{name}-gcc34.patch
-Patch1:		%{name}-lua50.patch
+Patch0:		%{name}-lua50.patch
+Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-ati.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	GConf2-devel
@@ -286,7 +285,7 @@ Tekstury ksiê¿yców Jowisza odkrytych przez Galileusza (Io,
 Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 
 %prep
-%setup -q -a2
+%setup -q -a2 -n %{name}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -322,18 +321,17 @@ rm -rf $RPM_BUILD_ROOT
 # desktop/icon
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_sysconfdir}/gconf/schemas}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
-install src/celestia/kde/data/hi48-app-celestia.png \
-	$RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
+install src/celestia/gtk/data/celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}
 mv $RPM_BUILD_ROOT/celestia.schemas $RPM_BUILD_ROOT%{_sysconfdir}/gconf/schemas
 
 # solarsys.ssc generator
-install -d $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
-install solar/* $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
-#cp -r scripts $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/scripts
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/data/solarsys
+install solar/* $RPM_BUILD_ROOT%{_datadir}/%{name}/data/solarsys
+#cp -r scripts $RPM_BUILD_ROOT%{_datadir}/%{name}/scripts
 
-cat > $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/solarsys-gen << EOF
+cat > $RPM_BUILD_ROOT%{_datadir}/%{name}/solarsys-gen << EOF
 #!/bin/sh
-cd %{_datadir}/apps/%{name}/data
+cd %{_datadir}/%{name}/data
 LANG=C cat solarsys/* > solarsys.ssc
 EOF
 
@@ -344,96 +342,99 @@ rm -rf $RPM_BUILD_ROOT
 
 # all texture-* here are required in one or another version, so no %%postun
 %post
-%{_datadir}/apps/%{name}/solarsys-gen
+%{_datadir}/%{name}/solarsys-gen
 #gconf_schema_install
 
-%post	textures-mercury-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-earth-default		-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-earth-clouds-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-moon-default		-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-mars-default		-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-galileanmoons-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%post	textures-mercury-default	-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-earth-default		-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-earth-clouds-default	-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-moon-default		-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-mars-default		-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-galileanmoons-default	-p %{_datadir}/%{name}/solarsys-gen
 
 # optional, so %%postun is also required
-%post	textures-mercury-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%postun	textures-mercury-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-earth-night-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%postun	textures-earth-night-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-mars-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%postun	textures-mars-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-moon-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%postun	textures-moon-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%post	textures-mercury-bumpmap-default	-p %{_datadir}/%{name}/solarsys-gen
+%postun	textures-mercury-bumpmap-default	-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-earth-night-default	-p %{_datadir}/%{name}/solarsys-gen
+%postun	textures-earth-night-default	-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-mars-bumpmap-default	-p %{_datadir}/%{name}/solarsys-gen
+%postun	textures-mars-bumpmap-default	-p %{_datadir}/%{name}/solarsys-gen
+%post	textures-moon-bumpmap-default	-p %{_datadir}/%{name}/solarsys-gen
+%postun	textures-moon-bumpmap-default	-p %{_datadir}/%{name}/solarsys-gen
 
 %files
 %defattr(644,root,root,755)
 #{_sysconfdir}/gconf/schemas/*
 %doc README AUTHORS TODO controls.txt ChangeLog
-%doc %{_datadir}/apps/celestia/manual
+%doc %{_datadir}/celestia/manual
 %attr(755,root,root) %{_bindir}/*
-%{_datadir}/apps/celestia/data/solarsys/04-mercury
-%{_datadir}/apps/celestia/data/solarsys/08-mercury
-%{_datadir}/apps/celestia/data/solarsys/10-venus
-%{_datadir}/apps/celestia/data/solarsys/24-earth
-%{_datadir}/apps/celestia/data/solarsys/28-earth
-%{_datadir}/apps/celestia/data/solarsys/35-moon
-%{_datadir}/apps/celestia/data/solarsys/44-mars
-%{_datadir}/apps/celestia/data/solarsys/48-mars-moons
-%{_datadir}/apps/celestia/data/solarsys/50-jupiter
-%{_datadir}/apps/celestia/data/solarsys/52-jupiter-small-moon
-%{_datadir}/apps/celestia/data/solarsys/60-saturn
-%{_datadir}/apps/celestia/data/solarsys/65-saturn-moons
-%{_datadir}/apps/celestia/data/solarsys/70-uranus
-%{_datadir}/apps/celestia/data/solarsys/75-uranus-moons
-%{_datadir}/apps/celestia/data/solarsys/80-neptune
-%{_datadir}/apps/celestia/data/solarsys/82-neptune-moons
-%{_datadir}/apps/celestia/data/solarsys/90-pluto
-%{_datadir}/apps/celestia/data/solarsys/92-pluto-moon
-%{_datadir}/apps/celestia/data/asterisms.dat
-%{_datadir}/apps/celestia/data/asteroids.ssc
-%{_datadir}/apps/celestia/data/boundaries.dat
-%{_datadir}/apps/celestia/data/cassini.xyz
-%{_datadir}/apps/celestia/data/comets.ssc
-%{_datadir}/apps/celestia/data/deepsky.dsc
-%{_datadir}/apps/celestia/data/galileo.xyz
-%{_datadir}/apps/celestia/data/huygens.xyz
-%{_datadir}/apps/celestia/data/outersys.ssc
-%verify(not md5 size mtime) %{_datadir}/apps/celestia/data/solarsys.ssc
-%{_datadir}/apps/celestia/data/solsys_locs.ssc
-%{_datadir}/apps/celestia/data/spacecraft.ssc
-%{_datadir}/apps/celestia/data/starnames.dat
-%{_datadir}/apps/celestia/data/world-capitals.ssc
-%{_datadir}/apps/celestia/extras
+%{_datadir}/celestia/data/solarsys/04-mercury
+%{_datadir}/celestia/data/solarsys/08-mercury
+%{_datadir}/celestia/data/solarsys/10-venus
+%{_datadir}/celestia/data/solarsys/24-earth
+%{_datadir}/celestia/data/solarsys/28-earth
+%{_datadir}/celestia/data/solarsys/35-moon
+%{_datadir}/celestia/data/solarsys/44-mars
+%{_datadir}/celestia/data/solarsys/48-mars-moons
+%{_datadir}/celestia/data/solarsys/50-jupiter
+%{_datadir}/celestia/data/solarsys/52-jupiter-small-moon
+%{_datadir}/celestia/data/solarsys/60-saturn
+%{_datadir}/celestia/data/solarsys/65-saturn-moons
+%{_datadir}/celestia/data/solarsys/70-uranus
+%{_datadir}/celestia/data/solarsys/75-uranus-moons
+%{_datadir}/celestia/data/solarsys/80-neptune
+%{_datadir}/celestia/data/solarsys/82-neptune-moons
+%{_datadir}/celestia/data/solarsys/90-pluto
+%{_datadir}/celestia/data/solarsys/92-pluto-moon
+%{_datadir}/celestia/data/asterisms.dat
+%{_datadir}/celestia/data/asteroids.ssc
+%{_datadir}/celestia/data/boundaries.dat
+%{_datadir}/celestia/data/cassini.xyz
+%{_datadir}/celestia/data/comets.ssc
+%{_datadir}/celestia/data/deepsky.dsc
+%{_datadir}/celestia/data/galileo.xyz
+%{_datadir}/celestia/data/hdxindex.dat
+%{_datadir}/celestia/data/huygens.xyz
+%{_datadir}/celestia/data/outersys.ssc
+%{_datadir}/celestia/data/saoxindex.dat
+%verify(not md5 size mtime) %{_datadir}/celestia/data/solarsys.ssc
+%{_datadir}/celestia/data/solsys_locs.ssc
+%{_datadir}/celestia/data/spacecraft.ssc
+%{_datadir}/celestia/data/starnames.dat
+%{_datadir}/celestia/data/world-capitals.ssc
+%{_datadir}/celestia/extras
+%{_datadir}/celestia/fonts
+%{_datadir}/celestia/models
+#{_datadir}/celestia/scripts
+%{_datadir}/celestia/shaders
+%dir %{_datadir}/celestia/textures
+%{_datadir}/celestia/textures/lores
+%{_datadir}/celestia/textures/medres
+%exclude %{_datadir}/celestia/textures/medres/callisto.jpg
+%exclude %{_datadir}/celestia/textures/medres/earth-clouds.png
+%exclude %{_datadir}/celestia/textures/medres/earth.jpg
+%exclude %{_datadir}/celestia/textures/medres/earthnight.jpg
+#%exclude %{_datadir}/celestia/textures/medres/earth-spec.jpg
+#%exclude %{_datadir}/celestia/textures/medres/earth.png
+%exclude %{_datadir}/celestia/textures/medres/europa.jpg
+%exclude %{_datadir}/celestia/textures/medres/ganymede.jpg
+%exclude %{_datadir}/celestia/textures/medres/io.jpg
+%exclude %{_datadir}/celestia/textures/medres/marsbump.jpg
+%exclude %{_datadir}/celestia/textures/medres/mars.jpg
+%exclude %{_datadir}/celestia/textures/medres/mercurybump.jpg
+%exclude %{_datadir}/celestia/textures/medres/mercury.jpg
+%exclude %{_datadir}/celestia/textures/medres/moonbump.jpg
+%exclude %{_datadir}/celestia/textures/medres/moon.jpg
+%{_datadir}/celestia/textures/flare.jpg
+%{_datadir}/celestia/textures/logo.png
+%{_datadir}/celestia/celestia.cfg
+%{_datadir}/celestia/celestia.png
+%{_datadir}/celestia/controls.txt
+%{_datadir}/celestia/*.cel
+
 %{_datadir}/apps/celestia/favicons
-%{_datadir}/apps/celestia/fonts
-%{_datadir}/apps/celestia/models
-#{_datadir}/apps/celestia/scripts
-%{_datadir}/apps/celestia/shaders
-%dir %{_datadir}/apps/celestia/textures
-%{_datadir}/apps/celestia/textures/lores
-%{_datadir}/apps/celestia/textures/medres
-%exclude %{_datadir}/apps/celestia/textures/medres/callisto.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/earth-clouds.png
-%exclude %{_datadir}/apps/celestia/textures/medres/earth.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/earthnight.jpg
-#%exclude %{_datadir}/apps/celestia/textures/medres/earth-spec.jpg
-#%exclude %{_datadir}/apps/celestia/textures/medres/earth.png
-%exclude %{_datadir}/apps/celestia/textures/medres/europa.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/ganymede.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/io.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/marsbump.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/mars.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/mercurybump.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/mercury.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/moonbump.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/moon.jpg
-%{_datadir}/apps/celestia/textures/flare.jpg
-%{_datadir}/apps/celestia/textures/logo.png
-%{_datadir}/apps/celestia/bookmarks.xml
-%{_datadir}/apps/celestia/celestia.cfg
-%{_datadir}/apps/celestia/celestia.png
 %{_datadir}/apps/celestia/celestiaui.rc
-%{_datadir}/apps/celestia/controls.txt
-%{_datadir}/apps/celestia/*.cel
+%{_datadir}/apps/celestia/bookmarks.xml
 %{_datadir}/apps/celestia/celestia-splash.jpg
 
 %{_desktopdir}/*
@@ -448,69 +449,69 @@ rm -rf $RPM_BUILD_ROOT
 
 %files generator
 %defattr(644,root,root,755)
-%dir %{_datadir}/apps/celestia
-%dir %{_datadir}/apps/celestia/data
-%dir %{_datadir}/apps/celestia/data/solarsys
-%attr(755,root,root) %{_datadir}/apps/celestia/solarsys-gen
+%dir %{_datadir}/celestia
+%dir %{_datadir}/celestia/data
+%dir %{_datadir}/celestia/data/solarsys
+%attr(755,root,root) %{_datadir}/celestia/solarsys-gen
 
 %files extrasolar-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/data/extrasolar.ssc
+%{_datadir}/celestia/data/extrasolar.ssc
 
 %files stars-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/data/stars.dat
+%{_datadir}/celestia/data/stars.dat
 
 %files textures-mercury-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/mercury.jpg
-%{_datadir}/apps/celestia/data/solarsys/00-mercury
+%{_datadir}/celestia/textures/medres/mercury.jpg
+%{_datadir}/celestia/data/solarsys/00-mercury
 
 %files textures-mercury-bumpmap-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/mercurybump.jpg
-%{_datadir}/apps/celestia/data/solarsys/02-mercury-bump
-%{_datadir}/apps/celestia/data/solarsys/06-mercury-bump
+%{_datadir}/celestia/textures/medres/mercurybump.jpg
+%{_datadir}/celestia/data/solarsys/02-mercury-bump
+%{_datadir}/celestia/data/solarsys/06-mercury-bump
 
 %files textures-earth-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/earth.jpg
-%{_datadir}/apps/celestia/data/solarsys/20-earth
+%{_datadir}/celestia/textures/medres/earth.jpg
+%{_datadir}/celestia/data/solarsys/20-earth
 
 %files textures-earth-clouds-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/earth-clouds.png
-%{_datadir}/apps/celestia/data/solarsys/26-earth-clouds
+%{_datadir}/celestia/textures/medres/earth-clouds.png
+%{_datadir}/celestia/data/solarsys/26-earth-clouds
 
 %files textures-earth-night-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/earthnight.jpg
-%{_datadir}/apps/celestia/data/solarsys/22-earth-night
+%{_datadir}/celestia/textures/medres/earthnight.jpg
+%{_datadir}/celestia/data/solarsys/22-earth-night
 
 %files textures-moon-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/moon.jpg
-%{_datadir}/apps/celestia/data/solarsys/30-moon
+%{_datadir}/celestia/textures/medres/moon.jpg
+%{_datadir}/celestia/data/solarsys/30-moon
 
 %files textures-moon-bumpmap-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/moonbump.jpg
-%{_datadir}/apps/celestia/data/solarsys/33-moon-bump
+%{_datadir}/celestia/textures/medres/moonbump.jpg
+%{_datadir}/celestia/data/solarsys/33-moon-bump
 
 %files textures-mars-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/mars.jpg
-%{_datadir}/apps/celestia/data/solarsys/40-mars
+%{_datadir}/celestia/textures/medres/mars.jpg
+%{_datadir}/celestia/data/solarsys/40-mars
 
 %files textures-mars-bumpmap-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/marsbump.jpg
-%{_datadir}/apps/celestia/data/solarsys/42-mars-bump
+%{_datadir}/celestia/textures/medres/marsbump.jpg
+%{_datadir}/celestia/data/solarsys/42-mars-bump
 
 %files textures-galileanmoons-default
 %defattr(644,root,root,755)
-%{_datadir}/apps/celestia/textures/medres/callisto.jpg
-%{_datadir}/apps/celestia/textures/medres/io.jpg
-%{_datadir}/apps/celestia/textures/medres/europa.jpg
-%{_datadir}/apps/celestia/textures/medres/ganymede.jpg
-%{_datadir}/apps/celestia/data/solarsys/55-jupiter-galilean-moons
+%{_datadir}/celestia/textures/medres/callisto.jpg
+%{_datadir}/celestia/textures/medres/io.jpg
+%{_datadir}/celestia/textures/medres/europa.jpg
+%{_datadir}/celestia/textures/medres/ganymede.jpg
+%{_datadir}/celestia/data/solarsys/55-jupiter-galilean-moons
