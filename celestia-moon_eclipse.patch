@@ -1,0 +1,146 @@
+diff -ruN celestia-1.2.4-/src/celengine/render.cpp celestia-1.2.4/src/celengine/render.cpp
+--- celestia-1.2.4-/src/celengine/render.cpp	Thu May  2 19:53:47 2002
++++ celestia-1.2.4/src/celengine/render.cpp	Sun Dec 22 22:44:25 2002
+@@ -72,7 +72,7 @@
+ static Texture* galaxyTex = NULL;
+ static Texture* shadowTex = NULL;
+ 
+-static Texture* eclipseShadowTextures[4];
++static Texture* eclipseShadowTextures[8];	//MB
+ 
+ static ResourceHandle starTexB = InvalidResource;
+ static ResourceHandle starTexA = InvalidResource;
+@@ -99,7 +99,7 @@
+ 
+ static int nCoordLabels = 32;
+ static SphericalCoordLabel* coordLabels = NULL;
+-
++static bool hasAtmosphere = false;           //MB
+ 
+ Renderer::Renderer() :
+     windowWidth(0),
+@@ -202,11 +202,52 @@
+ {
+     float r = (float) sqrt(u * u + v * v);
+     int pixVal = 255;
++	float um;
+ 
+     // Leave some white pixels around the edges to the shadow doesn't
+     // 'leak'.  We'll also set the maximum mip map level for this texture to 3
+     // so we don't have problems with the edge texels at high mip map levels.
+     r = r / (15.0f / 16.0f);
++if (umbra>=1) // MB
++    {     /* cout << "Test ombre modif";
++           cout << umbra;                          //MB
++           cout <<"  \n";    */
++
++   um=umbra-1.0;      // MB
++     pixel[0] = pixVal;
++     pixel[1] = pixVal;
++	 pixel[2] = pixVal;
++     if (r < 1)
++     {
++        // The pixel value should depend on the area of the sun which is
++        // occluded.  We just fudge it here and use the square root of the
++        // radius.
++        if (r <= um)
++           {
++          // pixVal = 0;
++            pixel[0] = 60;
++            pixel[1] = 10;
++            pixel[2] = 0;
++            }
++        else
++           {
++           pixVal = (int) (sqrt((r - um) / (1 - um)) * 255.99f);
++            if (pixVal<196)  pixel[0] = pixVal + 60;
++            if (pixVal<236)  pixel[1] = pixVal + 20;
++            pixVal = (int) (sqrt((r - um) / (1 - um)) *r*255.99f);
++            if (pixVal>10)  pixel[2] = pixVal; else   pixel[2] =0;
++
++            }
++     }
++
++    // pixel[0] = pixVal;
++     //pixel[1] = pixVal;
++     //pixel[2] = pixVal;
++     //  cout << pixel[0] ;                          //MB    */
++      // cout <<"  \n";
++  }
++     else {                           // cas normal MB
++
+     if (r < 1)
+     {
+         // The pixel value should depend on the area of the sun which is
+@@ -221,6 +262,7 @@
+     pixel[0] = pixVal;
+     pixel[1] = pixVal;
+     pixel[2] = pixVal;
++	}
+ };
+ 
+ static void IllumMapEval(float x, float y, float z,
+@@ -292,7 +334,7 @@
+ 
+         // Create the eclipse shadow textures
+         {
+-            for (int i = 0; i < 4; i++)
++            for (int i = 0; i < 8; i++)			//MB
+             {
+                 ShadowTextureFunction func(i * 0.25f);
+                 eclipseShadowTextures[i] =
+@@ -2160,7 +2202,27 @@
+         // the umbra and penumbra.
+         Texture* eclipseTex = NULL;
+         float umbra = shadow.umbraRadius / shadow.penumbraRadius;
+-        if (umbra < 0.1f)
++
++        if ( hasAtmosphere==true)
++        {
++       /* cout <<" Test Eclipse Lune";
++        cout <<"  \n";
++        cout <<umbra;                          //MB
++        cout <<"  \n";   */
++         if (umbra < 0.1f)
++            eclipseTex = eclipseShadowTextures[4];
++         else if (umbra < 0.35f)
++            eclipseTex = eclipseShadowTextures[5];
++         else if (umbra < 0.6f)
++			eclipseTex = eclipseShadowTextures[6];
++         else if (umbra < 0.9f)
++            eclipseTex = eclipseShadowTextures[7];
++         else
++            eclipseTex = shadowTex;
++        }
++        else
++        {
++		if (umbra < 0.1f)
+             eclipseTex = eclipseShadowTextures[0];
+         else if (umbra < 0.35f)
+             eclipseTex = eclipseShadowTextures[1];
+@@ -2170,7 +2232,7 @@
+             eclipseTex = eclipseShadowTextures[3];
+         else
+             eclipseTex = shadowTex;
+-
++		}
+         // Compute the transformation to use for generating texture
+         // coordinates from the object vertices.
+         Point3f origin = shadow.origin * planetMat;
+@@ -2633,6 +2695,16 @@
+                 (appOccluderRadius - appSunRadius) / appOccluderRadius;
+             eclipseShadows.insert(eclipseShadows.end(), shadow);
+ 
++		/////////////////////////
++         if (caster.getName() == "Earth" ) hasAtmosphere=true;    //MB
++            // if (receiver.getName() == "Earth" "Sol") hasAtmosphere=true;    //MB
++          else   hasAtmosphere=false;
++        /*  cout << caster.getName();//MB
++          cout <<receiver .getName();//MB
++          cout << hasAtmosphere;                          //MB
++           cout <<"  \n";  */
++       /////////////////////:
++
+             return true;
+         }
+     }
