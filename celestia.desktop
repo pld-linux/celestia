@@ -4,6 +4,6 @@ Comment=A real-time visual space simulation
 Comment[pl]=Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Icon=celestia.png
 Exec=celestia
-Terminal=0
+Terminal=false
 Type=Application
 # vi: encoding=utf-8
