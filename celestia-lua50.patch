@@ -1,12 +1,12 @@
 diff -ruN celestia./configure.in celestia/configure.in
---- celestia./configure.in	2004-04-19 22:24:18.000000000 +0200
-+++ celestia/configure.in	2004-07-08 20:17:01.825082120 +0200
-@@ -358,7 +358,7 @@
- AC_MSG_CHECKING([whether we enable Celestia Extension Language])
- if test "$enable_lua" != "no" ; then
-       CXXFLAGS="$CXXFLAGS -DCELX"
--      LDFLAGS="$LDFLAGS -llualib -llua"
-+      LDFLAGS="$LDFLAGS -llualib50 -llua50"
-       if test "$lua_includes" != "no" ; then
-            CXXFLAGS="$CXXFLAGS -I$lua_includes"
-       fi
+--- celestia./configure.in	2005-01-11 21:40:24.000000000 +0100
++++ celestia/configure.in	2005-01-11 21:40:46.963692448 +0100
+@@ -359,7 +359,7 @@
+ AC_MSG_CHECKING([whether to enable Celestia Extension Language])
+ if (test "$enable_lua" != "no"); then
+ 	CXXFLAGS="$CXXFLAGS -DCELX"
+-	LDFLAGS="$LDFLAGS -llualib -llua"
++	LDFLAGS="$LDFLAGS -llualib50 -llua50"
+ 	
+ 	if (test "$lua_includes" != "no"); then
+ 		CXXFLAGS="$CXXFLAGS -I$lua_includes"
