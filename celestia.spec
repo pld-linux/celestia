@@ -27,7 +27,6 @@ Requires:	%{name}-textures-mercury
 Requires:	%{name}-textures-venus
 Requires:	%{name}-textures-earth
 Requires:	%{name}-textures-earth-clouds
-Requires:	%{name}-textures-earth-night
 Requires:	%{name}-textures-moon
 Requires:	%{name}-textures-mars
 Requires:	%{name}-textures-jupiter
@@ -74,7 +73,6 @@ Requires:	%{name}-textures-mercury-default
 Requires:	%{name}-textures-venus-default
 Requires:	%{name}-textures-earth-default
 Requires:	%{name}-textures-earth-clouds-default
-Requires:	%{name}-textures-earth-night-default
 Requires:	%{name}-textures-moon-default
 Requires:	%{name}-textures-mars-default
 Requires:	%{name}-textures-jupiter-default
@@ -407,7 +405,6 @@ rm -rf $RPM_BUILD_ROOT
 %post	textures-venus-default		-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-earth-default		-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-earth-clouds-default	-p %{_datadir}/apps/%{name}/solarsys-gen
-%post	textures-earth-night-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-moon-default		-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-mars-default		-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-jupiter-default	-p %{_datadir}/apps/%{name}/solarsys-gen
@@ -419,6 +416,8 @@ rm -rf $RPM_BUILD_ROOT
 # optional, so %%postun is also required
 %post	textures-mercury-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 %postun	textures-mercury-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%post	textures-earth-night-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%postun	textures-earth-night-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-mars-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 %postun	textures-mars-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-moon-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
