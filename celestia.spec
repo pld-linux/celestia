@@ -66,13 +66,11 @@ CXXFLAGS="-I%{_includedir} %{rpmcflags} -fno-rtti -fno-exceptions"
 rm -rf $RPM_BUILD_ROOT
 %{__make} -e DESTDIR=$RPM_BUILD_ROOT install
 
-gzip -9nf README AUTHORS TODO controls.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README AUTHORS TODO controls.txt
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/*
