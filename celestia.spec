@@ -6,11 +6,12 @@ Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-# Source0-md5:	c641ed5b7c49cb2a49b41a65ae331097
+# Source0-md5:	cf11c9d1b1de5752c9b4681c15b823b4
 Source1:	%{name}.desktop
 Source2:	%{name}-solar-%{version}.tar.gz
 # Source2-md5:	aec445f5e06b5ac5582d513d2241e55c
 URL:		http://www.shatters.net/celestia/
+BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	fam-devel
@@ -20,7 +21,6 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	OpenGL-devel
 Requires:	OpenGL
 Requires:	%{name}-extrasolar
 Requires:	%{name}-stars
@@ -42,6 +42,7 @@ Obsoletes:	%{name}-galaxies
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
+%define		_htmldir	%{_docdir}/kde/HTML
 
 %description
 Celestia is a free real-time space simulation that lets you experience
@@ -369,7 +370,9 @@ rm -f missing
 %{__aclocal} -I macros
 %{__autoconf}
 %{__automake}
-CPPFLAGS="-I/usr/X11R6/include" CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
+CPPFLAGS="-I/usr/X11R6/include"
+CXXFLAGS="%{rpmcflags} -fno-exceptions"
+kde_htmldir="%{_htmldir}"; export kde_htmldir
 %configure \
 	--disable-rpath \
 	--with-kde \
@@ -398,6 +401,8 @@ cd %{_datadir}/apps/%{name}/data
 LANG=C cat solarsys/* > solarsys.ssc
 EOF
 
+%find_lang %{name} --with-kde
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -425,7 +430,7 @@ rm -rf $RPM_BUILD_ROOT
 %post	textures-moon-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 %postun	textures-moon-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README AUTHORS TODO controls.txt ChangeLog
 %doc %{_datadir}/apps/celestia/manual
@@ -479,8 +484,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_applnkdir}/Scientific/Astronomy/*
 %{_pixmapsdir}/*
-%{_datadir}/config
-%{_datadir}/doc/HTML/en/%{name}
+%{_datadir}/config/*
 %{_datadir}/mimelnk/application/*
 %{_datadir}/services/*
 
