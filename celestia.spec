@@ -2,7 +2,7 @@ Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
@@ -10,6 +10,7 @@ Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}-solar-%{version}.tar.gz
 # Source2-md5:	eabbb0718956528245de3573ae7f8bd7
+Patch0:		%{name}-gcc34.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -42,7 +43,6 @@ Obsoletes:	celestia-textures-pluto-default
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
-%define		_htmldir	%{_docdir}/kde/HTML
 
 %description
 Celestia is a free real-time space simulation that lets you experience
@@ -280,6 +280,7 @@ Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 
 %prep
 %setup -q -a2
+%patch0 -p1
 
 echo "You can remove this package safely." > PLACEHOLDER-TASK-DEFAULT
 
@@ -288,31 +289,36 @@ echo "You can remove this package safely." > PLACEHOLDER-TASK-DEFAULT
 %{__aclocal} -I macros
 %{__autoconf}
 %{__automake}
+
 CPPFLAGS="-I/usr/X11R6/include"
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
-kde_htmldir="%{_htmldir}"; export kde_htmldir
+
 %configure \
 	--disable-rpath \
 	--with-kde \
 	--without-gtk \
 	--without-lua \
 	--with-xinerama
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_pixmapsdir},%{_desktopdir}}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	kde_htmldir=%{_kdedocdir}
 
 # desktop/icon
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
-cp src/celestia/kde/data/hi48-app-celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
+install src/celestia/kde/data/hi48-app-celestia.png \
+	$RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
 
 # solarsys.ssc generator
 install -d $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
 install solar/* $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
+
 cat > $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/solarsys-gen << EOF
 #!/bin/sh
 cd %{_datadir}/apps/%{name}/data
