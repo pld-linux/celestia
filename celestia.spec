@@ -10,6 +10,8 @@ Group(pl):	X11/Aplikacje/Gry
 Source0:	http://prdownloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	glut-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
@@ -18,15 +20,10 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 Requires:	OpenGL
-Requires:	glut
-Requires:	gtk+
-Requires:	gtkglarea 
-Requires:	libjpeg
-Requires:	libpng
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
-%define		_noreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
+
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 
@@ -57,14 +54,12 @@ Interfejs typu 'poka¿-i-leæ' czyni nawigacjê przez Wszech¶wiat prost±.
 
 %build
 rm -f missing
-
 aclocal -I macros
 autoconf
 automake -a -f
 CFLAGS="-I%{_includedir} %{rpmcflags}"
 CPPFLAGS="-I%{_includedir} %{rpmcflags}"
 CXXFLAGS="-I%{_includedir} %{rpmcflags}"
-export CFLAGS CPPFLAGS CXXFLAGS
 %configure \
 	--enable-gtk
 %{__make}
