@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Celestia
+Comment=A real-time visual space simulation
+Comment[pl]=Symulacja przestrzeni kosmicznej w czasie rzeczywistym
+Icon=
+Exec=celestia
+Terminal=0
+Type=Application
+# vi: encoding=utf-8
