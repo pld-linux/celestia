@@ -14,7 +14,6 @@ Source2:	http://ep09.pld-linux.org/~havner/%{name}-solar-%{version}.tar.gz
 # Source2-md5:	1c4afc290816945250755d400852d04b
 Patch0:		%{name}-lua50.patch
 Patch1:		%{name}-makefile.patch
-Patch2:		%{name}-ati.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-devel
@@ -288,7 +287,6 @@ Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 %setup -q -a2 -n %{name}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 echo "You can remove this package safely." > PLACEHOLDER-TASK-DEFAULT
 
