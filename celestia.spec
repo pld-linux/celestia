@@ -367,7 +367,7 @@ rm -f missing
 %{__aclocal} -I macros
 %{__autoconf}
 %{__automake}
-CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
+CPPFLAGS="-I/usr/X11R6/include" CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
 %configure \
 	--disable-rpath \
 	--with-kde \
