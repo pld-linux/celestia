@@ -416,6 +416,14 @@ rm -rf $RPM_BUILD_ROOT
 %post	textures-triton-default		-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-pluto-default		-p %{_datadir}/apps/%{name}/solarsys-gen
 
+# optional, so %%postun is also required
+%post	textures-mercury-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%postun	textures-mercury-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%post	textures-mars-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%postun	textures-mars-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%post	textures-moon-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+%postun	textures-moon-bumpmap-default	-p %{_datadir}/apps/%{name}/solarsys-gen
+
 %files
 %defattr(644,root,root,755)
 %doc README AUTHORS TODO controls.txt ChangeLog
