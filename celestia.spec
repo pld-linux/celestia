@@ -1,28 +1,23 @@
 Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.2.5
-Release:	1
+Version:	1.3.0
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
-Source2:	http://www.la-guarida.com/Celestia/Textures/JupiterRings.zip
-Source3:	http://www.la-guarida.com/Celestia/Textures/NeptuneRings.zip
-Patch0:		%{name}-moon_eclipse.patch
-Patch1:		%{name}-planet_rings.patch
-Patch2:		%{name}-bumpmaps.patch
 URL:		http://www.shatters.net/celestia/
-BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	fam-devel
 BuildRequires:	glut-devel
-BuildRequires:	gnome-libs-devel
-BuildRequires:	gtk+-devel
-BuildRequires:	gtkglarea-devel
+BuildRequires:	kdelibs-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
+BuildRequires:	OpenGL-devel
 Requires:	OpenGL
 Requires:	%{name}-extrasolar
 Requires:	%{name}-galaxies
@@ -308,23 +303,28 @@ Obsoletes:	%{name}-textures-pluto
 Tekstury Plutona o wielko¶ci 1024 x 512.
 
 %prep
-%setup -q -a2 -a3
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%setup -q
 
 touch PLACEHOLDER-TASK-DEFAULT
 
 %build
-#rm -f missing
-#%%{__aclocal} -I macros
-#%%{__autoconf}
-#automake -a -f
-CFLAGS="-I%{_includedir} %{rpmcflags}"
-CPPFLAGS="-I%{_includedir} %{rpmcflags}"
-CXXFLAGS="-I%{_includedir} %{rpmcflags} -fno-rtti -fno-exceptions"
-%configure
+rm -f missing
+%{__libtoolize}
+%{__aclocal} -I macros
+%{__autoconf}
+%{__automake}
+#CFLAGS="-I%{_includedir} %{rpmcflags}"
+#CPPFLAGS="-I%{_includedir} %{rpmcflags} -fno-rtti -fno-exceptions"
+CXXFLAGS="%{rpmcflags} -fno-rtti -fno-exceptions"
+%configure \
+	--disable-rpath \
+	--with-kde \
+	--without-gtk \
+	--without-lua \
+	--with-xinerama
 %{__make}
+
+exit 1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -340,75 +340,6 @@ mv plutobump1k.jpg plutobump.jpg
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post textures-mercury-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"mercury....\"/\"mercury.jpg\"/g;s/\"mercurybump....\"/\"mercurybump.jpg\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-earth-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"earth....\"/\"earth.png\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-earth-clouds-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"earth-clouds....\"/\"earth-clouds.png\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-earth-night-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"earthnight....\"/\"earth-night.png\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-moon-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"moon....\"/\"moon.jpg\"/g;s/\"moonbump....\"/\"moonbump.jpg\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-mars-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"mars....\"/\"mars.jpg\"/g;s/\"marsbump....\"/\"marsbump.jpg\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-jupiter-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"jupiter....\"/\"jupiter.jpg\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-galileanmoons-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"callisto....\"/\"callisto.jpg\"/g" solarsys.ssc > .solar
-sed "s/\"io....\"/\"io.jpg\"/g" .solar > solarsys.ssc
-sed "s/\"europa....\"/\"europa.jpg\"/g" solarsys.ssc > .solar
-sed "s/\"ganymede....\"/\"ganymede.jpg\"/g" .solar > solarsys.ssc
-rm -f .solar
-
-%post textures-saturn-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"saturn....\"/\"saturn.jpg\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-triton-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"triton....\"/\"triton.jpg\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
-
-%post textures-pluto-default
-umask 022
-cd %{_datadir}/celestia/data
-sed "s/\"pluto....\"/\"pluto.jpg\"/g;s/\"plutobump....\"/\"plutobump.jpg\"/g" solarsys.ssc > .solar
-mv -f .solar solarsys.ssc
 
 %files
 %defattr(644,root,root,755)
@@ -462,7 +393,6 @@ mv -f .solar solarsys.ssc
 %files task-default
 %defattr(644,root,root,755)
 %doc PLACEHOLDER-TASK-DEFAULT
-
 
 %files extrasolar-default
 %defattr(644,root,root,755)
