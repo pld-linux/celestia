@@ -350,8 +350,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc README AUTHORS TODO controls.txt ChangeLog
 %doc %{_datadir}/apps/celestia/manual
 %attr(755,root,root) %{_bindir}/*
+%{_datadir}/apps/celestia/data/solarsys/04-mercury
+%{_datadir}/apps/celestia/data/solarsys/08-mercury
 %{_datadir}/apps/celestia/data/solarsys/10-venus
+%{_datadir}/apps/celestia/data/solarsys/24-earth
+%{_datadir}/apps/celestia/data/solarsys/28-earth
+%{_datadir}/apps/celestia/data/solarsys/35-moon
 %{_datadir}/apps/celestia/data/solarsys/37-earth-satellites
+%{_datadir}/apps/celestia/data/solarsys/44-mars
 %{_datadir}/apps/celestia/data/solarsys/48-mars-moons
 %{_datadir}/apps/celestia/data/solarsys/50-jupiter
 %{_datadir}/apps/celestia/data/solarsys/52-jupiter-small-moon
@@ -436,8 +442,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/mercury.jpg
 %{_datadir}/apps/celestia/data/solarsys/00-mercury
-%{_datadir}/apps/celestia/data/solarsys/04-mercury
-%{_datadir}/apps/celestia/data/solarsys/08-mercury
 
 %files textures-mercury-bumpmap-default
 %defattr(644,root,root,755)
@@ -449,8 +453,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/earth.jpg
 %{_datadir}/apps/celestia/data/solarsys/20-earth
-%{_datadir}/apps/celestia/data/solarsys/24-earth
-%{_datadir}/apps/celestia/data/solarsys/28-earth
 
 %files textures-earth-clouds-default
 %defattr(644,root,root,755)
@@ -466,7 +468,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/moon.jpg
 %{_datadir}/apps/celestia/data/solarsys/30-moon
-%{_datadir}/apps/celestia/data/solarsys/35-moon
 
 %files textures-moon-bumpmap-default
 %defattr(644,root,root,755)
@@ -477,7 +478,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/mars.jpg
 %{_datadir}/apps/celestia/data/solarsys/40-mars
-%{_datadir}/apps/celestia/data/solarsys/44-mars
 
 %files textures-mars-bumpmap-default
 %defattr(644,root,root,755)
