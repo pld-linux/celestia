@@ -1,7 +1,7 @@
 Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.2.4
+Version:	1.2.5
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
@@ -11,6 +11,7 @@ Source2:	http://www.la-guarida.com/Celestia/Textures/JupiterRings.zip
 Source3:	http://www.la-guarida.com/Celestia/Textures/NeptuneRings.zip
 Patch0:		%{name}-moon_eclipse.patch
 Patch1:		%{name}-planet_rings.patch
+Patch2:		%{name}-bumpmaps.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -23,7 +24,6 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 Requires:	OpenGL
-Requires:	%{name}-asterisms
 Requires:	%{name}-extrasolar
 Requires:	%{name}-galaxies
 Requires:	%{name}-stars
@@ -39,12 +39,10 @@ Requires:	%{name}-textures-galileanmoons
 Requires:	%{name}-textures-saturn
 Requires:	%{name}-textures-triton
 Requires:	%{name}-textures-pluto
+Obsoletes:	%{name}-asterisms
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
-
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 Celestia is a free real-time space simulation that lets you experience
@@ -72,7 +70,6 @@ Interfejs typu 'poka¿-i-leæ' czyni nawigacjê przez Wszech¶wiat prost±.
 Summary:	Default packages for celestia
 Summary(pl):	Domy¶lne pakiety dla celestii
 Group:		X11/Applications/Science
-Requires:	%{name}-asterisms-default
 Requires:	%{name}-extrasolar-default
 Requires:	%{name}-galaxies-default
 Requires:	%{name}-stars-default
@@ -96,20 +93,6 @@ and can be safely uninstalled after installation.
 %description task-default -l pl
 Domy¶lne pakiety dla celestii. Ten metapakiet nie zawiera ¿adnych
 plików i mo¿e zostaæ usuniêty po instalacji.
-
-%package asterisms-default
-Summary:	53 celestia asterisms
-Summary(pl):	53 konstelacje dla celestiii
-Group:		X11/Applications/Science
-Requires:	%{name}
-Provides:	%{name}-asterisms
-Obsoletes:	%{name}-asterisms
-
-%description asterisms-default
-53 asterisms for celestia.
-
-%description asterisms-default -l pl
-53 gwiazdozbiory dla celestii.
 
 %package extrasolar-default
 Summary:	Catalog of known extrasolar planetary systems
@@ -328,14 +311,15 @@ Tekstury Plutona o wielko¶ci 1024 x 512.
 %setup -q -a2 -a3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 touch PLACEHOLDER-TASK-DEFAULT
 
 %build
-rm -f missing
-%{__aclocal} -I macros
-%{__autoconf}
-automake -a -f
+#rm -f missing
+#%{__aclocal} -I macros
+#%{__autoconf}
+#automake -a -f
 CFLAGS="-I%{_includedir} %{rpmcflags}"
 CPPFLAGS="-I%{_includedir} %{rpmcflags}"
 CXXFLAGS="-I%{_includedir} %{rpmcflags} -fno-rtti -fno-exceptions"
@@ -384,13 +368,13 @@ mv -f .solar solarsys.ssc
 %post textures-moon-default
 umask 022
 cd %{_datadir}/celestia/data
-sed "s/\"moon....\"/\"moon.jpg\"/g" solarsys.ssc > .solar
+sed "s/\"moon....\"/\"moon.jpg\"/g;s/\"moonbump....\"/\"moonbump.jpg\"/g" solarsys.ssc > .solar
 mv -f .solar solarsys.ssc
 
 %post textures-mars-default
 umask 022
 cd %{_datadir}/celestia/data
-sed "s/\"mars....\"/\"mars.jpg\"/g;s/\"marsbump....\"/\"marsbump.dds\"/g" solarsys.ssc > .solar
+sed "s/\"mars....\"/\"mars.jpg\"/g;s/\"marsbump....\"/\"marsbump.jpg\"/g" solarsys.ssc > .solar
 mv -f .solar solarsys.ssc
 
 %post textures-jupiter-default
@@ -423,7 +407,7 @@ mv -f .solar solarsys.ssc
 %post textures-pluto-default
 umask 022
 cd %{_datadir}/celestia/data
-sed "s/\"pluto....\"/\"pluto.jpg\"/g" solarsys.ssc > .solar
+sed "s/\"pluto....\"/\"pluto.jpg\"/g;s/\"plutobump....\"/\"plutobump.jpg\"/g" solarsys.ssc > .solar
 mv -f .solar solarsys.ssc
 
 %files
@@ -433,6 +417,9 @@ mv -f .solar solarsys.ssc
 %attr(755,root,root) %{_bindir}/*
 %dir %{_datadir}/celestia
 %dir %{_datadir}/celestia/data
+%{_datadir}/celestia/data/asterisms.dat
+%{_datadir}/celestia/data/boundaries.dat
+%{_datadir}/celestia/data/galileo.xyz
 # problem: after upgrade it will be lost
 %verify(not md5 size mtime) %{_datadir}/celestia/data/solarsys.ssc
 %{_datadir}/celestia/data/hdnames.dat
@@ -458,6 +445,7 @@ mv -f .solar solarsys.ssc
 %{_datadir}/celestia/textures/medres/neptune-rings.png
 %{_datadir}/celestia/textures/medres/oberon.jpg
 %{_datadir}/celestia/textures/medres/phobos.jpg
+%{_datadir}/celestia/textures/medres/renova.jpg
 %{_datadir}/celestia/textures/medres/rhea.jpg
 %{_datadir}/celestia/textures/medres/tethys.jpg
 %{_datadir}/celestia/textures/medres/titania.jpg
@@ -475,9 +463,6 @@ mv -f .solar solarsys.ssc
 %defattr(644,root,root,755)
 %doc PLACEHOLDER-TASK-DEFAULT
 
-%files asterisms-default
-%defattr(644,root,root,755)
-%{_datadir}/celestia/data/asterisms.dat
 
 %files extrasolar-default
 %defattr(644,root,root,755)
