@@ -1,0 +1,72 @@
+diff -ruN celestia-1.2.5-/data/solarsys.ssc celestia-1.2.5/data/solarsys.ssc
+--- celestia-1.2.5-/data/solarsys.ssc	Tue Jan 14 02:00:56 2003
++++ celestia-1.2.5/data/solarsys.ssc	Tue Jan 14 02:37:19 2003
+@@ -30,7 +30,7 @@
+ "Venus" "Sol"
+ {
+ 	Texture "venus.jpg"
+-	# BumpMap "venusbump.jpg"
++	BumpMap "venusbump.jpg"
+ 	HazeColor [ 0.5 0.35 0.2 ]
+ 	HazeDensity 0.35
+ 	Radius 6052
+@@ -76,8 +76,8 @@
+ 	Radius 6378
+ 	# Oblateness 0.003
+ 
+-	# BumpMap "earthbump4k.jpg"
+-	# BumpHeight 4.5
++	BumpMap "earthbump.jpg"
++	BumpHeight 4.5
+ 
+ 	Atmosphere {
+ 		Height 60
+@@ -111,7 +111,7 @@
+ 	Texture "moon.jpg"
+ 	# Texture "clem-moon-4k.jpg"
+ 	# Texture "moon4k.dds"
+-	BumpMap "moonbump1k.jpg"
++	BumpMap "moonbump.jpg"
+ 	BumpHeight 0.7
+ 	Radius   1737.53
+ 	Oblateness 0.002
+@@ -208,7 +208,7 @@
+ {
+ 	Texture "mars.jpg"
+ 	# Texture "mars8k.dds"
+-	BumpMap "marsbump1k.jpg"
++	BumpMap "marsbump.jpg"
+ 	BumpHeight 2.5
+ 	Color   [ 1 0.75 0.7 ]
+ 	HazeColor [ 1 1 1 ]
+@@ -247,8 +247,8 @@
+ {
+ 	Mesh "phobos.3ds"
+ 	Texture "phobos.jpg"
+-	# BumpMap "phobosbump.jpg"
+-	# BumpHeight 5
++	BumpMap "phobosbump.jpg"
++	BumpHeight 5
+ 	Radius 11
+ 
+ 	EllipticalOrbit
+@@ -495,8 +495,8 @@
+ {
+ 	Texture "mimas.jpg"
+ 	# Texture "white.jpg"
+-	# BumpMap "mimasbump.jpg"
+-	# BumpHeight 10.0
++	BumpMap "mimasbump.jpg"
++	BumpHeight 10.0
+ 	Color [ 0.75 0.63 0.58 ]
+ 	BlendTexture true
+ 	Radius    199
+@@ -946,7 +946,7 @@
+ "Pluto" "Sol"
+ {
+ 	Texture "pluto.jpg"
+-	BumpMap "plutobump1k.jpg"
++	BumpMap "plutobump.jpg"
+ 	BumpHeight 2.5
+ 	Radius 1137
+ 
