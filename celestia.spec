@@ -7,7 +7,10 @@ License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://prdownloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
+Source2:	http://www.la-guarida.com/Celestia/Textures/JupiterRings.zip
+Source3:	http://www.la-guarida.com/Celestia/Textures/NeptuneRings.zip
 Patch0:		%{name}-moon_eclipse.patch
+Patch1:		%{name}-planet_rings.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -322,8 +325,9 @@ Obsoletes:	%{name}-textures-pluto
 Tekstury Plutona o wielko¶ci 1024 x 512.
 
 %prep
-%setup -q
+%setup -q -a2 -a3
 %patch0 -p1
+%patch1 -p1
 
 touch PLACEHOLDER-TASK-DEFAULT
 
@@ -343,6 +347,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -e DESTDIR=$RPM_BUILD_ROOT install
 install -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Astronomy
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Astronomy/%{name}.desktop
+install {jupiter,neptune}-rings.png $RPM_BUILD_ROOT%{_datadir}/celestia/textures/medres/
 
 cd $RPM_BUILD_ROOT%{_datadir}/celestia/textures/medres
 mv moonbump1k.jpg moonbump.jpg
@@ -446,9 +451,11 @@ mv -f .solar solarsys.ssc
 %{_datadir}/celestia/textures/medres/dione.jpg
 %{_datadir}/celestia/textures/medres/gasgiant.jpg
 %{_datadir}/celestia/textures/medres/iapetus.jpg
+%{_datadir}/celestia/textures/medres/jupiter-rings.png
 %{_datadir}/celestia/textures/medres/jupiterlike.jpg
 %{_datadir}/celestia/textures/medres/mimas.jpg
 %{_datadir}/celestia/textures/medres/miranda.jpg
+%{_datadir}/celestia/textures/medres/neptune-rings.png
 %{_datadir}/celestia/textures/medres/oberon.jpg
 %{_datadir}/celestia/textures/medres/phobos.jpg
 %{_datadir}/celestia/textures/medres/rhea.jpg
