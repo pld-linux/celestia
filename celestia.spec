@@ -369,7 +369,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/celestia/data/solarsys/24-earth
 %{_datadir}/apps/celestia/data/solarsys/28-earth
 %{_datadir}/apps/celestia/data/solarsys/35-moon
-%{_datadir}/apps/celestia/data/solarsys/37-earth-satellites
 %{_datadir}/apps/celestia/data/solarsys/44-mars
 %{_datadir}/apps/celestia/data/solarsys/48-mars-moons
 %{_datadir}/apps/celestia/data/solarsys/50-jupiter
@@ -382,7 +381,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/celestia/data/solarsys/82-neptune-moons
 %{_datadir}/apps/celestia/data/solarsys/90-pluto
 %{_datadir}/apps/celestia/data/solarsys/92-pluto-moon
-%{_datadir}/apps/celestia/data/solarsys/99-various
 %{_datadir}/apps/celestia/data/asterisms.dat
 %{_datadir}/apps/celestia/data/asteroids.ssc
 %{_datadir}/apps/celestia/data/boundaries.dat
