@@ -59,7 +59,7 @@ autoconf
 automake -a -f
 CFLAGS="-I%{_includedir} %{rpmcflags}"
 CPPFLAGS="-I%{_includedir} %{rpmcflags}"
-CXXFLAGS="-I%{_includedir} %{rpmcflags}"
+CXXFLAGS="-I%{_includedir} %{rpmcflags} -fno-rtti -fno-exceptions"
 %configure \
 	--enable-gtk
 %{__make}
