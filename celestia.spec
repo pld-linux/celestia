@@ -2,10 +2,11 @@ Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.1.4
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://prdownloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
+Source1:	%{name}.desktop
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -65,6 +66,8 @@ CXXFLAGS="-I%{_includedir} %{rpmcflags} -fno-rtti -fno-exceptions"
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__make} -e DESTDIR=$RPM_BUILD_ROOT install
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Astronomy
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Scientific/Astronomy/%{name}.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -74,3 +77,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc README AUTHORS TODO controls.txt
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/*
+%{_applnkdir}/Scientific/Astronomy/*
