@@ -53,7 +53,7 @@ Interfejs typu 'poka¿-i-leæ' czyni nawigacjê przez Wszech¶wiat prost±.
 %build
 rm -f missing
 aclocal -I macros
-autoconf
+%{__autoconf}
 automake -a -f
 CFLAGS="-I%{_includedir} %{rpmcflags}"
 CPPFLAGS="-I%{_includedir} %{rpmcflags}"
