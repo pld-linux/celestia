@@ -2,7 +2,7 @@ Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.3.2
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
@@ -11,12 +11,13 @@ Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 #Source0:	%{name}-%{_snap}.tar.bz2
 Source1:	%{name}.desktop
 Source2:	http://ep09.pld-linux.org/~havner/%{name}-solar-%{version}.tar.gz
-# Source2-md5:	0cbe4d38ec80cd4ab665cd694eb8c638
-# Source2-size:	18091458
+# Source2-md5:	1c4afc290816945250755d400852d04b
+# Source2-size:	6688
 Patch0:		%{name}-gcc34.patch
 Patch1:		%{name}-lua50.patch
 Patch2:		%{name}-ati.patch
 URL:		http://www.shatters.net/celestia/
+BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -285,7 +286,7 @@ Tekstury ksiê¿yców Jowisza odkrytych przez Galileusza (Io,
 Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 
 %prep
-%setup -q -a2 -n %{name}
+%setup -q -a2
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -295,7 +296,7 @@ echo "You can remove this package safely." > PLACEHOLDER-TASK-DEFAULT
 %build
 touch config.h.in
 %{__libtoolize}
-%{__aclocal} -I macros
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 
@@ -319,15 +320,16 @@ rm -rf $RPM_BUILD_ROOT
 	kde_htmldir=%{_kdedocdir}
 
 # desktop/icon
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_sysconfdir}/gconf/schemas}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
 install src/celestia/kde/data/hi48-app-celestia.png \
 	$RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
+mv $RPM_BUILD_ROOT/celestia.schemas $RPM_BUILD_ROOT%{_sysconfdir}/gconf/schemas
 
 # solarsys.ssc generator
 install -d $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
 install solar/* $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
-cp -r scripts $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/scripts
+#cp -r scripts $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/scripts
 
 cat > $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/solarsys-gen << EOF
 #!/bin/sh
@@ -341,7 +343,10 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 # all texture-* here are required in one or another version, so no %%postun
-%post	-p %{_datadir}/apps/%{name}/solarsys-gen
+%post
+%{_datadir}/apps/%{name}/solarsys-gen
+#gconf_schema_install
+
 %post	textures-mercury-default	-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-earth-default		-p %{_datadir}/apps/%{name}/solarsys-gen
 %post	textures-earth-clouds-default	-p %{_datadir}/apps/%{name}/solarsys-gen
@@ -361,6 +366,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+#{_sysconfdir}/gconf/schemas/*
 %doc README AUTHORS TODO controls.txt ChangeLog
 %doc %{_datadir}/apps/celestia/manual
 %attr(755,root,root) %{_bindir}/*
@@ -400,7 +406,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/celestia/favicons
 %{_datadir}/apps/celestia/fonts
 %{_datadir}/apps/celestia/models
-%{_datadir}/apps/celestia/scripts
+#{_datadir}/apps/celestia/scripts
 %{_datadir}/apps/celestia/shaders
 %dir %{_datadir}/apps/celestia/textures
 %{_datadir}/apps/celestia/textures/lores
@@ -428,6 +434,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/celestia/celestiaui.rc
 %{_datadir}/apps/celestia/controls.txt
 %{_datadir}/apps/celestia/*.cel
+%{_datadir}/apps/celestia/celestia-splash.jpg
 
 %{_desktopdir}/*
 %{_pixmapsdir}/*
