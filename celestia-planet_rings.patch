@@ -1,10 +1,10 @@
-diff -ruN celestia-1.2.4-/data/solarsys.ssc celestia-1.2.4/data/solarsys.ssc
---- celestia-1.2.4-/data/solarsys.ssc	Tue Apr 30 19:36:02 2002
-+++ celestia-1.2.4/data/solarsys.ssc	Thu Jan  2 21:50:53 2003
-@@ -285,6 +285,12 @@
-                              # calculations of satellite positions
- 	                     # old values: 337.68, 157.68
- 	Albedo            0.51
+diff -ruN celestia-1.2.5-/data/solarsys.ssc celestia-1.2.5/data/solarsys.ssc
+--- celestia-1.2.5-/data/solarsys.ssc	Tue Jan  7 16:36:56 2003
++++ celestia-1.2.5/data/solarsys.ssc	Tue Jan 14 01:45:22 2003
+@@ -321,6 +321,12 @@
+ 	RotationOffset      305.40
+ 
+ 	Albedo 0.51
 +
 +	Rings {
 +		Inner 92000
@@ -13,11 +13,11 @@ diff -ruN celestia-1.2.4-/data/solarsys.ssc celestia-1.2.4/data/solarsys.ssc
 +	}
  }
  
- "Amalthea" "Sol/Jupiter"
-@@ -784,6 +790,12 @@
- 	LongOfRotationAxis 49.235
  
- 	Albedo            0.62
+@@ -850,6 +856,12 @@
+ 	RotationOffset       228.65
+ 
+ 	Albedo                 0.62
 +
 +	Rings {
 +		Inner 41900
