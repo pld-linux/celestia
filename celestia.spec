@@ -21,7 +21,6 @@ BuildRequires:	libtool
 BuildRequires:	OpenGL-devel
 Requires:	OpenGL
 Requires:	%{name}-extrasolar
-Requires:	%{name}-deepsky
 Requires:	%{name}-stars
 Requires:	%{name}-generator
 Requires:	%{name}-textures-mercury
@@ -38,6 +37,7 @@ Requires:	%{name}-textures-triton
 Requires:	%{name}-textures-pluto
 Obsoletes:	%{name}-textures-stars
 Obsoletes:	%{name}-asterisms
+Obsoletes:	%{name}-galaxies
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
@@ -69,7 +69,6 @@ Summary:	Default packages for celestia
 Summary(pl):	Domy¶lne pakiety dla celestii
 Group:		X11/Applications/Science
 Requires:	%{name}-extrasolar-default
-Requires:	%{name}-deepsky-default
 Requires:	%{name}-stars-default
 Requires:	%{name}-textures-mercury-default
 Requires:	%{name}-textures-venus-default
@@ -116,21 +115,6 @@ Catalog of known extrasolar planetary systems.
 
 %description extrasolar-default -l pl
 Katalog znanych uk³adów planetarnych.
-
-%package deepsky-default
-Summary:	Galaxy catalog (8 galaxies)
-Summary(pl):	Katalog o¶miu galaktyk
-Group:		X11/Applications/Science
-Requires:	%{name}
-Provides:	%{name}-deepsky
-Obsoletes:	%{name}-deepsky
-Obsoletes:	%{name}-galaxies
-
-%description deepsky-default
-Galaxy catalog (8 galaxies).
-
-%description deepsky-default -l pl
-Katalog o¶miu galaktyk.
 
 %package stars-default
 Summary:	Database with 100 000 stars
@@ -404,6 +388,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/celestia/data/solarsys/99-various
 %{_datadir}/apps/celestia/data/asterisms.dat
 %{_datadir}/apps/celestia/data/boundaries.dat
+%{_datadir}/apps/celestia/data/deepsky.dsc
 %{_datadir}/apps/celestia/data/galileo.xyz
 %verify(not md5 size mtime) %{_datadir}/apps/celestia/data/solarsys.ssc
 %{_datadir}/apps/celestia/data/hdnames.dat
@@ -459,10 +444,6 @@ rm -rf $RPM_BUILD_ROOT
 %files extrasolar-default
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/data/extrasolar.ssc
-
-%files deepsky-default
-%defattr(644,root,root,755)
-%{_datadir}/apps/celestia/data/deepsky.dsc
 
 %files stars-default
 %defattr(644,root,root,755)
