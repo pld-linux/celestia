@@ -165,7 +165,7 @@ Standardowe tekstury gwiazd.
 Summary:	1k Mercury textures
 Summary(pl):	Tekstury Merkurego o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-mercury
 Obsoletes:	%{name}-textures-mercury
 
@@ -179,7 +179,7 @@ Tekstury Merkurego o wielko¶ci 1024 x 512.
 Summary:	2k Earth textures
 Summary(pl):	Tekstury Ziemi o wielko¶ci 2048 x 1024
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-earth
 Obsoletes:	%{name}-textures-earth
 
@@ -193,7 +193,7 @@ Tekstury Ziemi o wielko¶ci 2048 x 1024.
 Summary:	1k Moon textures
 Summary(pl):	Tekstury Ksiê¿yca o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-moon
 Obsoletes:	%{name}-textures-moon
 
@@ -207,7 +207,7 @@ Tekstury Ksiê¿yca o wielko¶ci 1024 x 512.
 Summary:	1k Mars textures
 Summary(pl):	Tekstury Marsa o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-mars
 Obsoletes:	%{name}-textures-mars
 
@@ -221,7 +221,7 @@ Tekstury Marsa o wielko¶ci 1024 x 512.
 Summary:	1k Jupiter textures
 Summary(pl):	Tekstury Jowisza o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-jupiter
 Obsoletes:	%{name}-textures-jupiter
 
@@ -235,7 +235,7 @@ Tekstury Jowisza o wielko¶ci 1024 x 512.
 Summary:	1k galilean moons textures
 Summary(pl):	Tekstury ksiê¿yców odkrytych przez Galileusza o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-galileanmoons
 Obsoletes:	%{name}-textures-galileanmoons
 
@@ -250,7 +250,7 @@ Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 Summary:	256 Saturn textures
 Summary(pl):	Tekstury Saturna o wielko¶ci 256 x 128
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-saturn
 Obsoletes:	%{name}-textures-saturn
 
@@ -264,7 +264,7 @@ Tekstury Jowisza o wielko¶ci 256 x 128.
 Summary:	512 Triton textures
 Summary(pl):	Tekstury Trytona o wielko¶ci 512 x 256
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-triton
 Obsoletes:	%{name}-textures-triton
 
@@ -279,7 +279,7 @@ o wielko¶ci 512 x 256.
 Summary:	1k Pluto textures
 Summary(pl):	Tekstury Plutona o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Requires:	%{name}
+Prereq:		%{name}
 Provides:	%{name}-textures-pluto
 Obsoletes:	%{name}-textures-pluto
 
