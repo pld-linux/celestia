@@ -352,6 +352,75 @@ mv plutobump1k.jpg plutobump.jpg
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post textures-mercury-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"mercury....\"/\"mercury.jpg\"/g;s/\"mercurybump....\"/\"mercurybump.jpg\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-earth-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"earth....\"/\"earth.png\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-earth-clouds-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"earth-clouds....\"/\"earth-clouds.png\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-earth-night-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"earthnight....\"/\"earth-night.png\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-moon-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"moon....\"/\"moon.jpg\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-mars-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"mars....\"/\"mars.jpg\"/g;s/\"marsbump....\"/\"marsbump.dds\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-jupiter-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"jupiter....\"/\"jupiter.jpg\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-galileanmoons-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"callisto....\"/\"callisto.jpg\"/g" solarsys.ssc > .solar
+sed "s/\"io....\"/\"io.jpg\"/g" .solar > solarsys.ssc
+sed "s/\"europa....\"/\"europa.jpg\"/g" solarsys.ssc > .solar
+sed "s/\"ganymede....\"/\"ganymede.jpg\"/g" .solar > solarsys.ssc
+rm -f .solar
+
+%post textures-saturn-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"saturn....\"/\"saturn.jpg\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-triton-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"triton....\"/\"triton.jpg\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
+%post textures-pluto-default
+umask 022
+cd %{_datadir}/celestia/data
+sed "s/\"pluto....\"/\"pluto.jpg\"/g" solarsys.ssc > .solar
+mv -f .solar solarsys.ssc
+
 %files
 %defattr(644,root,root,755)
 %doc README AUTHORS TODO controls.txt
