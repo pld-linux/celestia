@@ -27,6 +27,8 @@ Requires:	%{name}-stars
 Requires:	%{name}-textures-stars
 Requires:	%{name}-textures-mercury
 Requires:	%{name}-textures-earth
+Requires:	%{name}-textures-earth-clouds
+Requires:	%{name}-textures-earth-night
 Requires:	%{name}-textures-moon
 Requires:	%{name}-textures-mars
 Requires:	%{name}-textures-jupiter
@@ -74,6 +76,8 @@ Requires:	%{name}-stars-default
 Requires:	%{name}-textures-stars-default
 Requires:	%{name}-textures-mercury-default
 Requires:	%{name}-textures-earth-default
+Requires:	%{name}-textures-earth-clouds-default
+Requires:	%{name}-textures-earth-night-default
 Requires:	%{name}-textures-moon-default
 Requires:	%{name}-textures-mars-default
 Requires:	%{name}-textures-jupiter-default
@@ -188,6 +192,34 @@ Obsoletes:	%{name}-textures-earth
 
 %description textures-earth-default -l pl
 Tekstury Ziemi o wielko¶ci 2048 x 1024.
+
+%package textures-earth-clouds-default
+Summary:	1k Earth cloud textures
+Summary(pl):	Tekstury ziemskich chmur o wielko¶ci 1024 x 512
+Group:		X11/Applications/Science
+Prereq:		%{name}
+Provides:	%{name}-textures-earth-clouds
+Obsoletes:	%{name}-textures-earth-clouds
+
+%description textures-earth-clouds-default
+1k Earth clouds textures.
+
+%description textures-earth-clouds-default -l pl
+Tekstury ziemskich chmur o wielko¶ci 1024 x 512.
+
+%package textures-earth-night-default
+Summary:	1k Earth night textures
+Summary(pl):	Tekstury nocnych ¶wiate³ miast o wielko¶ci 1024 x 512
+Group:		X11/Applications/Science
+Prereq:		%{name}
+Provides:	%{name}-textures-earth-night
+Obsoletes:	%{name}-textures-earth-night
+
+%description textures-earth-night-default
+1k Earth night textures.
+
+%description textures-earth-night-default -l pl
+Tekstury nocnych ¶wiate³ miast o wielko¶ci 1024 x 512.
 
 %package textures-moon-default
 Summary:	1k Moon textures
@@ -398,8 +430,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files textures-earth-default
 %defattr(644,root,root,755)
-%{_datadir}/celestia/textures/medres/earth-clouds.png
 %{_datadir}/celestia/textures/medres/earth.png
+
+%files textures-earth-clouds-default
+%defattr(644,root,root,755)
+%{_datadir}/celestia/textures/medres/earth-clouds.png
+
+%files textures-earth-night-default
+%defattr(644,root,root,755)
 %{_datadir}/celestia/textures/medres/earthnight.jpg
 
 %files textures-moon-default
