@@ -2,22 +2,32 @@ Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.1.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Games
 Group(de):	X11/Applikationen/Spiele
 Group(pl):	X11/Aplikacje/Gry
 Source0:	http://prdownloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 URL:		http://www.shatters.net/celestia/
-BuildRequires:	libpng-devel libjpeg-devel glut-devel OpenGL-devel gtk+-devel gtkglarea-devel 
-BuildRequires:	/usr/share/automake/depcomp
-Requires:	libpng libjpeg glut OpenGL gtk+ gtkglarea 
+BuildRequires:	OpenGL-devel
+BuildRequires:	glut-devel
+BuildRequires:	gnome-libs-devel
+BuildRequires:	gtk+-devel
+BuildRequires:	gtkglarea-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel
+BuildRequires:	libstdc++-devel
+Requires:	OpenGL
+Requires:	glut
+Requires:	gtk+
+Requires:	gtkglarea 
+Requires:	libjpeg
+Requires:	libpng
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         _noautoreqdep   libGL.so.1 libGLU.so.1 libGLcore.so.1
-%define         _noreqdep  	 libGL.so.1 libGLU.so.1 libGLcore.so.1
+%define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
+%define		_noreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
 %define		_prefix		/usr/X11R6
-%define		_datadir	%{_prefix}/share
 %define		_mandir		%{_prefix}/man
 
 %description
@@ -44,12 +54,19 @@ Interfejs typu 'poka¿-i-leæ' czyni nawigacjê przez Wszech¶wiat prost±.
 
 %prep
 %setup -q
-# This is some kind of problem with automake:
-ln -s /usr/share/automake/depcomp
 
 %build
-export CC=%{__cc}
-./configure --prefix=%{_prefix} --enable-gtk
+rm -f missing
+
+aclocal -I macros
+autoconf
+automake -a -f
+CFLAGS="-I%{_includedir} %{rpmcflags}"
+CPPFLAGS="-I%{_includedir} %{rpmcflags}"
+CXXFLAGS="-I%{_includedir} %{rpmcflags}"
+export CFLAGS CPPFLAGS CXXFLAGS
+%configure \
+	--enable-gtk
 %{__make}
 
 %install
@@ -63,6 +80,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz AUTHOR.gz TODO.gz controls.txt.gz
+%doc *.gz 
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/*
