@@ -5,8 +5,6 @@ Version:	1.1.4
 Release:	2
 License:	GPL
 Group:		X11/Applications/Games
-Group(de):	X11/Applikationen/Spiele
-Group(pl):	X11/Aplikacje/Gry
 Source0:	http://prdownloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
