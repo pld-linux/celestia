@@ -1,16 +1,19 @@
+%define		_snap	20040708
 Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.3.1
-Release:	2
+Version:	1.3.2
+Release:	0.%{_snap}.1
 License:	GPL
 Group:		X11/Applications/Science
-Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-# Source0-md5:	fcb73c43f5899f8f7e6d0c619a818a8b
+#Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
+Source0:	%{name}-%{_snap}.tar.bz2
+# Source0-md5:	3ffcccd9c113fc5ccf4a28ce98f3af2d
 Source1:	%{name}.desktop
 Source2:	%{name}-solar-%{version}.tar.gz
 # Source2-md5:	eabbb0718956528245de3573ae7f8bd7
 Patch0:		%{name}-gcc34.patch
+Patch1:		%{name}-lua50.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -22,6 +25,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+BuildRequires:	lua50-devel
 Requires:	OpenGL
 Requires:	%{name}-extrasolar
 Requires:	%{name}-stars
@@ -279,28 +283,30 @@ Tekstury ksiê¿yców Jowisza odkrytych przez Galileusza (Io,
 Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 
 %prep
-%setup -q -a2
+%setup -q -a2 -n %{name}
 %patch0 -p1
+%patch1 -p1
 
 echo "You can remove this package safely." > PLACEHOLDER-TASK-DEFAULT
 
 %build
+touch config.h.in
 %{__libtoolize}
 %{__aclocal} -I macros
 %{__autoconf}
 %{__automake}
 
-CPPFLAGS="-I/usr/X11R6/include"
+CPPFLAGS="-I/usr/X11R6/include -I/usr/include/lua50"
 CXXFLAGS="%{rpmcflags} -fno-exceptions"
 
 %configure \
 	--disable-rpath \
 	--with-kde \
 	--without-gtk \
-	--without-lua \
+	--with-lua \
 	--with-xinerama
 
-%{__make}
+%{__make} ACLOCAL="%{__aclocal} -I macros"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -375,12 +381,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/celestia/data/solarsys/92-pluto-moon
 %{_datadir}/apps/celestia/data/solarsys/99-various
 %{_datadir}/apps/celestia/data/asterisms.dat
+%{_datadir}/apps/celestia/data/asteroids.ssc
 %{_datadir}/apps/celestia/data/boundaries.dat
+%{_datadir}/apps/celestia/data/cassini.xyz
+%{_datadir}/apps/celestia/data/comets.ssc
 %{_datadir}/apps/celestia/data/deepsky.dsc
 %{_datadir}/apps/celestia/data/galileo.xyz
+%{_datadir}/apps/celestia/data/huygens.xyz
+%{_datadir}/apps/celestia/data/outersys.ssc
 %verify(not md5 size mtime) %{_datadir}/apps/celestia/data/solarsys.ssc
-%{_datadir}/apps/celestia/data/hdnames.dat
 %{_datadir}/apps/celestia/data/solsys_locs.ssc
+%{_datadir}/apps/celestia/data/spacecraft.ssc
 %{_datadir}/apps/celestia/data/starnames.dat
 %{_datadir}/apps/celestia/data/world-capitals.ssc
 %{_datadir}/apps/celestia/extras
@@ -391,28 +402,26 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/apps/celestia/textures
 %{_datadir}/apps/celestia/textures/lores
 %{_datadir}/apps/celestia/textures/medres
-%exclude %{_datadir}/apps/celestia/textures/medres/mercury.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/mercurybump.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/earth.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/earth-clouds.png
-%exclude %{_datadir}/apps/celestia/textures/medres/earthnight.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/moon.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/moonbump.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/mars.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/marsbump.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/marsbump1k.jpg
 %exclude %{_datadir}/apps/celestia/textures/medres/callisto.jpg
-%exclude %{_datadir}/apps/celestia/textures/medres/io.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/earth-clouds.png
+%exclude %{_datadir}/apps/celestia/textures/medres/earth.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/earthnight.jpg
+#%exclude %{_datadir}/apps/celestia/textures/medres/earth-spec.jpg
+#%exclude %{_datadir}/apps/celestia/textures/medres/earth.png
 %exclude %{_datadir}/apps/celestia/textures/medres/europa.jpg
 %exclude %{_datadir}/apps/celestia/textures/medres/ganymede.jpg
-%{_datadir}/apps/celestia/textures/astar.jpg
-%{_datadir}/apps/celestia/textures/bstar.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/io.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/marsbump.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/mars.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/mercurybump.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/mercury.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/moonbump.jpg
+%exclude %{_datadir}/apps/celestia/textures/medres/moon.jpg
 %{_datadir}/apps/celestia/textures/flare.jpg
-%{_datadir}/apps/celestia/textures/gstar.jpg
 %{_datadir}/apps/celestia/textures/logo.png
-%{_datadir}/apps/celestia/textures/mstar.jpg
 %{_datadir}/apps/celestia/bookmarks.xml
 %{_datadir}/apps/celestia/celestia.cfg
+%{_datadir}/apps/celestia/celestia.png
 %{_datadir}/apps/celestia/celestiaui.rc
 %{_datadir}/apps/celestia/controls.txt
 %{_datadir}/apps/celestia/*.cel
@@ -486,7 +495,6 @@ rm -rf $RPM_BUILD_ROOT
 %files textures-mars-bumpmap-default
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/marsbump.jpg
-%{_datadir}/apps/celestia/textures/medres/marsbump1k.jpg
 %{_datadir}/apps/celestia/data/solarsys/42-mars-bump
 
 %files textures-galileanmoons-default
