@@ -31,15 +31,14 @@ Requires:	%{name}-textures-earth-clouds
 Requires:	%{name}-textures-moon
 Requires:	%{name}-textures-mars
 Requires:	%{name}-textures-galileanmoons
-Obsoletes:	%{name}-textures-stars
-Obsoletes:	%{name}-asterisms
-Obsoletes:	%{name}-galaxies
-Obsoletes:	%{name}-textures-venus-default
-Obsoletes:	%{name}-textures-jupiter-default
-Obsoletes:	%{name}-textures-saturn-default
-Obsoletes:	%{name}-textures-triton-default
-Obsoletes:	%{name}-textures-pluto-default
-
+Obsoletes:	celestia-textures-stars
+Obsoletes:	celestia-asterisms
+Obsoletes:	celestia-galaxies
+Obsoletes:	celestia-textures-venus-default
+Obsoletes:	celestia-textures-jupiter-default
+Obsoletes:	celestia-textures-saturn-default
+Obsoletes:	celestia-textures-triton-default
+Obsoletes:	celestia-textures-pluto-default
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
@@ -132,7 +131,7 @@ przez sondê kosmiczn± Hipparcos).
 Summary:	1k Mercury textures
 Summary(pl):	Tekstury Merkurego o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-mercury
 Obsoletes:	%{name}-textures-mercury
@@ -147,7 +146,7 @@ Tekstury Merkurego o wielko¶ci 1024 x 512.
 Summary:	1k Mercury bump maps
 Summary(pl):	Mapa wybojów Merkurego o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-mercury-bumpmap
 Obsoletes:	%{name}-textures-mercury-bumpmap
@@ -162,7 +161,7 @@ Mapa wybojów Merkurego o wielko¶ci 1024 x 512.
 Summary:	2k Earth textures
 Summary(pl):	Tekstury Ziemi o wielko¶ci 2048 x 1024
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-earth
 Obsoletes:	%{name}-textures-earth
@@ -177,7 +176,7 @@ Tekstury Ziemi o wielko¶ci 2048 x 1024.
 Summary:	1k Earth cloud textures
 Summary(pl):	Tekstury ziemskich chmur o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-earth-clouds
 Obsoletes:	%{name}-textures-earth-clouds
@@ -192,7 +191,7 @@ Tekstury ziemskich chmur o wielko¶ci 1024 x 512.
 Summary:	1k Earth night textures
 Summary(pl):	Tekstury nocnych ¶wiate³ miast o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-earth-night
 Obsoletes:	%{name}-textures-earth-night
@@ -207,7 +206,7 @@ Tekstury nocnych ¶wiate³ miast o wielko¶ci 1024 x 512.
 Summary:	1k Moon textures
 Summary(pl):	Tekstury Ksiê¿yca o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-moon
 Obsoletes:	%{name}-textures-moon
@@ -222,7 +221,7 @@ Tekstury Ksiê¿yca o wielko¶ci 1024 x 512.
 Summary:	1k Moon bump map
 Summary(pl):	Mapa wybojów Ksiê¿yca o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-moon-bumpmap
 Obsoletes:	%{name}-textures-moon-bumpmap
@@ -237,7 +236,7 @@ Mapa wybojów Ksiê¿yca o wielko¶ci 1024 x 512.
 Summary:	1k Mars textures
 Summary(pl):	Tekstury Marsa o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-mars
 Obsoletes:	%{name}-textures-mars
@@ -252,7 +251,7 @@ Tekstury Marsa o wielko¶ci 1024 x 512.
 Summary:	1k Mars bump map
 Summary(pl):	Mapa wybojów Marsa o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-mars-bumpmap
 Obsoletes:	%{name}-textures-mars-bumpmap
@@ -267,7 +266,7 @@ Mapa wybojów Marsa o wielko¶ci 1024 x 512.
 Summary:	1k galilean moons textures
 Summary(pl):	Tekstury ksiê¿yców odkrytych przez Galileusza o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-Prereq:		%{name}-generator
+PreReq:		%{name}-generator
 Requires:	%{name}
 Provides:	%{name}-textures-galileanmoons
 Obsoletes:	%{name}-textures-galileanmoons
@@ -285,7 +284,6 @@ Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 echo "You can remove this package safely." > PLACEHOLDER-TASK-DEFAULT
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal} -I macros
 %{__autoconf}
