@@ -324,6 +324,7 @@ install src/celestia/kde/data/hi48-app-celestia.png \
 # solarsys.ssc generator
 install -d $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
 install solar/* $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/data/solarsys
+cp -r scripts $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/scripts
 
 cat > $RPM_BUILD_ROOT%{_datadir}/apps/%{name}/solarsys-gen << EOF
 #!/bin/sh
@@ -398,6 +399,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/apps/celestia/favicons
 %{_datadir}/apps/celestia/fonts
 %{_datadir}/apps/celestia/models
+%{_datadir}/apps/celestia/scripts
 %{_datadir}/apps/celestia/shaders
 %dir %{_datadir}/apps/celestia/textures
 %{_datadir}/apps/celestia/textures/lores
