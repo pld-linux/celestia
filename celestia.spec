@@ -146,6 +146,21 @@ Obsoletes:	%{name}-textures-mercury
 %description textures-mercury-default -l pl
 Tekstury Merkurego o wielko¶ci 1024 x 512.
 
+%package textures-mercury-bumpmap-default
+Summary:	1k Mercury bump maps
+Summary(pl):	Mapa wybojów Merkurego o wielko¶ci 1024 x 512
+Group:		X11/Applications/Science
+Prereq:		%{name}-generator
+Requires:	%{name}
+Provides:	%{name}-textures-mercury-bumpmap
+Obsoletes:	%{name}-textures-mercury-bumpmap
+
+%description textures-mercury-bumpmap-default
+1k Mercury bump map.
+
+%description textures-mercury-bumpmap-default -l pl
+Mapa wybojów Merkurego o wielko¶ci 1024 x 512.
+
 %package textures-venus-default
 Summary:	1k Venus textures
 Summary(pl):	Tekstury Wenus o wielko¶ci 1024 x 512
@@ -221,6 +236,21 @@ Obsoletes:	%{name}-textures-moon
 %description textures-moon-default -l pl
 Tekstury Ksiê¿yca o wielko¶ci 1024 x 512.
 
+%package textures-moon-bumpmap-default
+Summary:	1k Moon bump map
+Summary(pl):	Mapa wybojów Ksiê¿yca o wielko¶ci 1024 x 512
+Group:		X11/Applications/Science
+Prereq:		%{name}-generator
+Requires:	%{name}
+Provides:	%{name}-textures-moon-bumpmap
+Obsoletes:	%{name}-textures-moon-bumpmap
+
+%description textures-moon-bumpmap-default
+1k Moon bump map.
+
+%description textures-moon-bumpmap-default -l pl
+Mapa wybojów Ksiê¿yca o wielko¶ci 1024 x 512.
+
 %package textures-mars-default
 Summary:	1k Mars textures
 Summary(pl):	Tekstury Marsa o wielko¶ci 1024 x 512
@@ -235,6 +265,21 @@ Obsoletes:	%{name}-textures-mars
 
 %description textures-mars-default -l pl
 Tekstury Marsa o wielko¶ci 1024 x 512.
+
+%package textures-mars-bumpmap-default
+Summary:	1k Mars bump map
+Summary(pl):	Mapa wybojów Marsa o wielko¶ci 1024 x 512
+Group:		X11/Applications/Science
+Prereq:		%{name}-generator
+Requires:	%{name}
+Provides:	%{name}-textures-mars-bumpmap
+Obsoletes:	%{name}-textures-mars-bumpmap
+
+%description textures-mars-bumpmap-default
+1k Mars bump map.
+
+%description textures-mars-bumpmap-default -l pl
+Mapa wybojów Marsa o wielko¶ci 1024 x 512.
 
 %package textures-jupiter-default
 Summary:	1k Jupiter textures
@@ -376,8 +421,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc README AUTHORS TODO controls.txt ChangeLog
 %doc %{_datadir}/apps/celestia/manual
 %attr(755,root,root) %{_bindir}/*
-%{_datadir}/apps/celestia/data/solarsys/35-earth-satellites
-%{_datadir}/apps/celestia/data/solarsys/45-mars-moons
+%{_datadir}/apps/celestia/data/solarsys/37-earth-satellites
+%{_datadir}/apps/celestia/data/solarsys/48-mars-moons
 %{_datadir}/apps/celestia/data/solarsys/52-jupiter-small-moon
 %{_datadir}/apps/celestia/data/solarsys/65-saturn-moons
 %{_datadir}/apps/celestia/data/solarsys/70-uranus
@@ -452,8 +497,13 @@ rm -rf $RPM_BUILD_ROOT
 %files textures-mercury-default
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/mercury.jpg
-%{_datadir}/apps/celestia/textures/medres/mercurybump.jpg
 %{_datadir}/apps/celestia/data/solarsys/00-mercury
+%{_datadir}/apps/celestia/data/solarsys/07-mercury
+
+%files textures-mercury-bumpmap-default
+%defattr(644,root,root,755)
+%{_datadir}/apps/celestia/textures/medres/mercurybump.jpg
+%{_datadir}/apps/celestia/data/solarsys/05-mercury-bump
 
 %files textures-venus-default
 %defattr(644,root,root,755)
@@ -481,14 +531,25 @@ rm -rf $RPM_BUILD_ROOT
 %files textures-moon-default
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/moon.jpg
-%{_datadir}/apps/celestia/textures/medres/moonbump1k.jpg
 %{_datadir}/apps/celestia/data/solarsys/30-moon
+%{_datadir}/apps/celestia/data/solarsys/35-moon
+
+%files textures-moon-bumpmap-default
+%defattr(644,root,root,755)
+%{_datadir}/apps/celestia/textures/medres/moonbump1k.jpg
+%{_datadir}/apps/celestia/data/solarsys/33-moon-bump
 
 %files textures-mars-default
 %defattr(644,root,root,755)
 %{_datadir}/apps/celestia/textures/medres/mars.jpg
-%{_datadir}/apps/celestia/textures/medres/marsbump1k.jpg
 %{_datadir}/apps/celestia/data/solarsys/40-mars
+%{_datadir}/apps/celestia/data/solarsys/44-mars
+%{_datadir}/apps/celestia/data/solarsys/46-mars
+
+%files textures-mars-bumpmap-default
+%defattr(644,root,root,755)
+%{_datadir}/apps/celestia/textures/medres/marsbump1k.jpg
+%{_datadir}/apps/celestia/data/solarsys/42-mars-bump
 
 %files textures-jupiter-default
 %defattr(644,root,root,755)
