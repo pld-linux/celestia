@@ -1,12 +1,13 @@
 Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.1.4
-Release:	3
+Version:	1.2.4
+Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://prdownloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
+Patch0:		%{name}-moon_eclipse.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -50,6 +51,7 @@ Interfejs typu 'poka¿-i-leæ' czyni nawigacjê przez Wszech¶wiat prost±.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 rm -f missing
@@ -59,8 +61,7 @@ automake -a -f
 CFLAGS="-I%{_includedir} %{rpmcflags}"
 CPPFLAGS="-I%{_includedir} %{rpmcflags}"
 CXXFLAGS="-I%{_includedir} %{rpmcflags} -fno-rtti -fno-exceptions"
-%configure \
-	--enable-gtk
+%configure
 %{__make}
 
 %install
