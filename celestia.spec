@@ -317,8 +317,8 @@ touch PLACEHOLDER-TASK-DEFAULT
 
 %build
 #rm -f missing
-#%{__aclocal} -I macros
-#%{__autoconf}
+#%%{__aclocal} -I macros
+#%%{__autoconf}
 #automake -a -f
 CFLAGS="-I%{_includedir} %{rpmcflags}"
 CPPFLAGS="-I%{_includedir} %{rpmcflags}"
