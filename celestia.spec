@@ -98,10 +98,10 @@ Summary(pl):	Hack potrzebny z powodu obsysania rpm-a
 Group:		X11/Applications/Science
 
 %description generator
-Generates solarsys.ssc.
+Generates solarsys.ssc .
 
-%descreption generator -l pl
-Tworzy solarsys.ssc.
+%description generator -l pl
+Tworzy solarsys.ssc .
 
 %package extrasolar-default
 Summary:	Catalog of known extrasolar planetary systems
