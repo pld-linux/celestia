@@ -1,17 +1,18 @@
-%define		_snap	20040708
 Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.3.2
-Release:	0.%{_snap}.2
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Science
-#Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-Source0:	%{name}-%{_snap}.tar.bz2
-# Source0-md5:	3ffcccd9c113fc5ccf4a28ce98f3af2d
+Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
+# Source0-md5:	0aaf86592a8989a0576e34c1f4cb3c2a
+# Source0-size:	18091458
+#Source0:	%{name}-%{_snap}.tar.bz2
 Source1:	%{name}.desktop
 Source2:	http://ep09.pld-linux.org/~havner/%{name}-solar-%{version}.tar.gz
 # Source2-md5:	0cbe4d38ec80cd4ab665cd694eb8c638
+# Source2-size:	18091458
 Patch0:		%{name}-gcc34.patch
 Patch1:		%{name}-lua50.patch
 Patch2:		%{name}-ati.patch
