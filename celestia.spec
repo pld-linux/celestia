@@ -5,7 +5,7 @@ Version:	1.2.5
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
-Source0:	http://prdownloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	http://www.la-guarida.com/Celestia/Textures/JupiterRings.zip
 Source3:	http://www.la-guarida.com/Celestia/Textures/NeptuneRings.zip
