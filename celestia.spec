@@ -6,8 +6,10 @@ Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
+# Source0-md5:	c641ed5b7c49cb2a49b41a65ae331097
 Source1:	%{name}.desktop
 Source2:	%{name}-solar-%{version}.tar.gz
+# Source2-md5:	aec445f5e06b5ac5582d513d2241e55c
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	autoconf
 BuildRequires:	automake
