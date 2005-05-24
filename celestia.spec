@@ -305,7 +305,8 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions"
 	--with-kde \
 	--without-gtk \
 	--with-lua \
-	--with-xinerama
+	--with-xinerama \
+	--with-qt-dir=%{_libdir}
 
 %{__make} ACLOCAL="%{__aclocal} -I macros"
 
