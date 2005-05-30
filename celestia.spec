@@ -27,6 +27,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	lua50-devel
+BuildRequires:	pkgconfig
 Requires:	OpenGL
 Requires:	%{name}-extrasolar
 Requires:	%{name}-stars
