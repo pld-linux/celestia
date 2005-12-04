@@ -281,8 +281,8 @@ Obsoletes:	%{name}-textures-galileanmoons
 1k galilean moons (Io, Europa, Ganymede, Calypso) textures.
 
 %description textures-galileanmoons-default -l pl
-Tekstury ksiê¿yców Jowisza odkrytych przez Galileusza (Io,
-Europa, Ganimedes, Calypso) o wielko¶ci 1024 x 512.
+Tekstury ksiê¿yców Jowisza odkrytych przez Galileusza (Io, Europa,
+Ganimedes, Calypso) o wielko¶ci 1024 x 512.
 
 %prep
 %setup -q -a2 -n %{name}
@@ -397,7 +397,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/celestia/data/huygens.xyz
 %{_datadir}/celestia/data/outersys.ssc
 %{_datadir}/celestia/data/saoxindex.dat
-%verify(not md5 size mtime) %{_datadir}/celestia/data/solarsys.ssc
+%verify(not md5 mtime size) %{_datadir}/celestia/data/solarsys.ssc
 %{_datadir}/celestia/data/solsys_locs.ssc
 %{_datadir}/celestia/data/spacecraft.ssc
 %{_datadir}/celestia/data/starnames.dat
