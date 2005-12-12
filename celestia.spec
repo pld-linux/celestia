@@ -28,16 +28,16 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	lua50-devel
 BuildRequires:	pkgconfig
-Requires:	OpenGL
 Requires:	%{name}-extrasolar
-Requires:	%{name}-stars
 Requires:	%{name}-generator
-Requires:	%{name}-textures-mercury
+Requires:	%{name}-stars
 Requires:	%{name}-textures-earth
 Requires:	%{name}-textures-earth-clouds
-Requires:	%{name}-textures-moon
-Requires:	%{name}-textures-mars
 Requires:	%{name}-textures-galileanmoons
+Requires:	%{name}-textures-mars
+Requires:	%{name}-textures-mercury
+Requires:	%{name}-textures-moon
+Requires:	OpenGL
 Obsoletes:	celestia-textures-stars
 Obsoletes:	celestia-asterisms
 Obsoletes:	celestia-galaxies
@@ -78,16 +78,16 @@ Summary(pl):	Domy¶lne pakiety dla celestii
 Group:		X11/Applications/Science
 Requires:	%{name}-extrasolar-default
 Requires:	%{name}-stars-default
-Requires:	%{name}-textures-mercury-default
-Requires:	%{name}-textures-earth-default
 Requires:	%{name}-textures-earth-clouds-default
-Requires:	%{name}-textures-moon-default
-Requires:	%{name}-textures-mars-default
+Requires:	%{name}-textures-earth-default
 Requires:	%{name}-textures-galileanmoons-default
+Requires:	%{name}-textures-mars-default
+Requires:	%{name}-textures-mercury-default
+Requires:	%{name}-textures-moon-default
 
 %description task-default
-Default packages for celestia. This metapackage contains no files
-and can be safely uninstalled after installation.
+Default packages for celestia. This metapackage contains no files and
+can be safely uninstalled after installation.
 
 %description task-default -l pl
 Domy¶lne pakiety dla celestii. Ten metapakiet nie zawiera ¿adnych
@@ -130,15 +130,15 @@ Obsoletes:	%{name}-stars
 Initial Stars database (with about 100 000 Hipparcos stars).
 
 %description stars-default -l pl
-Podstawowa baza danych gwiazd (z oko³o 100 000 gwiazd zbadanych
-przez sondê kosmiczn± Hipparcos).
+Podstawowa baza danych gwiazd (z oko³o 100 000 gwiazd zbadanych przez
+sondê kosmiczn± Hipparcos).
 
 %package textures-mercury-default
 Summary:	1k Mercury textures
 Summary(pl):	Tekstury Merkurego o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-mercury
 Obsoletes:	%{name}-textures-mercury
 
@@ -152,8 +152,8 @@ Tekstury Merkurego o wielko¶ci 1024 x 512.
 Summary:	1k Mercury bump maps
 Summary(pl):	Mapa wybojów Merkurego o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-mercury-bumpmap
 Obsoletes:	%{name}-textures-mercury-bumpmap
 
@@ -167,8 +167,8 @@ Mapa wybojów Merkurego o wielko¶ci 1024 x 512.
 Summary:	2k Earth textures
 Summary(pl):	Tekstury Ziemi o wielko¶ci 2048 x 1024
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-earth
 Obsoletes:	%{name}-textures-earth
 
@@ -182,8 +182,8 @@ Tekstury Ziemi o wielko¶ci 2048 x 1024.
 Summary:	1k Earth cloud textures
 Summary(pl):	Tekstury ziemskich chmur o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-earth-clouds
 Obsoletes:	%{name}-textures-earth-clouds
 
@@ -197,8 +197,8 @@ Tekstury ziemskich chmur o wielko¶ci 1024 x 512.
 Summary:	1k Earth night textures
 Summary(pl):	Tekstury nocnych ¶wiate³ miast o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-earth-night
 Obsoletes:	%{name}-textures-earth-night
 
@@ -212,8 +212,8 @@ Tekstury nocnych ¶wiate³ miast o wielko¶ci 1024 x 512.
 Summary:	1k Moon textures
 Summary(pl):	Tekstury Ksiê¿yca o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-moon
 Obsoletes:	%{name}-textures-moon
 
@@ -227,8 +227,8 @@ Tekstury Ksiê¿yca o wielko¶ci 1024 x 512.
 Summary:	1k Moon bump map
 Summary(pl):	Mapa wybojów Ksiê¿yca o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-moon-bumpmap
 Obsoletes:	%{name}-textures-moon-bumpmap
 
@@ -242,8 +242,8 @@ Mapa wybojów Ksiê¿yca o wielko¶ci 1024 x 512.
 Summary:	1k Mars textures
 Summary(pl):	Tekstury Marsa o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-mars
 Obsoletes:	%{name}-textures-mars
 
@@ -257,8 +257,8 @@ Tekstury Marsa o wielko¶ci 1024 x 512.
 Summary:	1k Mars bump map
 Summary(pl):	Mapa wybojów Marsa o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-mars-bumpmap
 Obsoletes:	%{name}-textures-mars-bumpmap
 
@@ -272,8 +272,8 @@ Mapa wybojów Marsa o wielko¶ci 1024 x 512.
 Summary:	1k galilean moons textures
 Summary(pl):	Tekstury ksiê¿yców odkrytych przez Galileusza o wielko¶ci 1024 x 512
 Group:		X11/Applications/Science
-PreReq:		%{name}-generator
 Requires:	%{name}
+Requires:	%{name}-generator
 Provides:	%{name}-textures-galileanmoons
 Obsoletes:	%{name}-textures-galileanmoons
 
