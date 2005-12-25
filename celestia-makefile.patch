@@ -1,15 +1,15 @@
-diff -ruN celestia./Makefile.am celestia/Makefile.am
---- celestia./Makefile.am	2004-09-23 22:53:05.000000000 +0200
-+++ celestia/Makefile.am	2005-01-11 21:50:57.814828960 +0100
-@@ -31,10 +31,4 @@
+diff -ruN celestia-1.4.0./Makefile.am celestia-1.4.0/Makefile.am
+--- celestia-1.4.0./Makefile.am	2005-12-25 00:36:47.000000000 +0100
++++ celestia-1.4.0/Makefile.am	2005-12-25 00:38:04.094027272 +0100
+@@ -31,11 +31,3 @@
  	cd $(top_distdir) && $(MAKE) -f admin/Makefile.common subdirs
  
  install-data-hook:
--	if [ -d $(kde_datadir)/@PACKAGE@ -a ! -h $(kde_datadir)/@PACKAGE@ ] ; then \
+-	if [ "$(kde_datadir)" -a -d $(kde_datadir)/@PACKAGE@ -a ! -h $(kde_datadir)/@PACKAGE@ ] ; then \
 -		mv -f -b $(kde_datadir)/@PACKAGE@/* $(datadir)/@PACKAGE@/ ; \
 -		rmdir $(kde_datadir)/@PACKAGE@ ; \
 -	fi
--	if [ ! -h $(kde_datadir)/@PACKAGE@ ] ; then \
+-	if [ "$(kde_datadir)" -a ! -h $(kde_datadir)/@PACKAGE@ ] ; then \
 -		ln -s $(datadir)/@PACKAGE@ $(kde_datadir)/@PACKAGE@ ; \
 -	fi
-+
+-
