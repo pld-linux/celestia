@@ -1,40 +1,71 @@
+
+%bcond_without	kde		# KDE UI as the default one
+%bcond_with	gtk		# use gtk2 UI instead
+%bcond_with	gnome		# use libgnome2 UI instead
+%bcond_with	glut		# use glut UI instead
+
+%if %{with gtk} || %{with gnome} || %{with glut}
+%undefine	with_kde
+%endif
+
 Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.4.0
+Version:	1.4.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-# Source0-md5:	d4bd0029af87fdd9cb4a0828cf62a025
-Source1:	%{name}.desktop
+# Source0-md5:	be1d36fc97a13b9a276249dbc0efac41
 Patch0:		%{name}-lua50.patch
 Patch1:		%{name}-makefile.patch
 Patch2:		%{name}-gcc4.patch
 Patch3:		%{name}-extras.patch
+Patch4:		%{name}-desktop.patch
 URL:		http://www.shatters.net/celestia/
-BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	fam-devel
-BuildRequires:	glut-devel
-BuildRequires:	kdelibs-devel
+%{?with_glut:BuildRequires:	glut-devel >= 3.7}
+%if %{with gtk} || %{with gnome}
+BuildRequires:	cairo-devel
+BuildRequires:	gtk+2-devel >= 2.6
+BuildRequires:	gtkglext-devel
+%endif
+%{?with_kde:BuildRequires:	kdelibs-devel}
+%{?with_gnome:BuildRequires:	libgnomeui-devel}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	lua50-devel
 BuildRequires:	pkgconfig
+BuildRequires:	sed >= 4.0
 Requires:	OpenGL
-Obsoletes:	celestia-textures-stars
-Obsoletes:	celestia-asterisms
-Obsoletes:	celestia-galaxies
-Obsoletes:	celestia-textures-venus-default
-Obsoletes:	celestia-textures-jupiter-default
-Obsoletes:	celestia-textures-saturn-default
-Obsoletes:	celestia-textures-triton-default
-Obsoletes:	celestia-textures-pluto-default
+# celestia < 1.4 original packages
+Obsoletes:	celestia-extrasolar
+Obsoletes:	celestia-generator
+Obsoletes:	celestia-stars
+Obsoletes:	celestia-task-default
+# texture replacement addons, virtual provides
+Obsoletes:	celestia-textures-earth
+Obsoletes:	celestia-textures-earth-clouds
+Obsoletes:	celestia-textures-earth-night
+Obsoletes:	celestia-textures-galileanmoons
+Obsoletes:	celestia-textures-mars
+Obsoletes:	celestia-textures-mars-bumpmap
+Obsoletes:	celestia-textures-mercury
+Obsoletes:	celestia-textures-mercury-bumpmap
+Obsoletes:	celestia-textures-moon
+Obsoletes:	celestia-textures-moon-bumpmap
+# celestia addons
+Obsoletes:	celestia-blackhole
+Obsoletes:	celestia-galaxies_extended
+Obsoletes:	celestia-galaxy_clusters
+Obsoletes:	celestia-globular_clusters
+Obsoletes:	celestia-im-starwars
+Obsoletes:	celestia-pathfinder
+Obsoletes:	celestia-voyager
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
@@ -67,53 +98,67 @@ Interfejs typu 'poka¿-i-leæ' czyni nawigacjê przez Wszech¶wiat prost±.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+
+# ugly hack not to require GConf2-devel if we're not building gnome version
+%{!?with_gnome:sed -i "s#AM_GCONF_SOURCE_2##g" configure.in}
 
 %build
-touch config.h.in
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-
-CPPFLAGS="-I/usr/X11R6/include -I/usr/include/lua50"
-CXXFLAGS="%{rpmcflags} -fno-exceptions"
+cp -f /usr/share/automake/config.sub admin
+%{__make} -f admin/Makefile.common
 
 %configure \
+	%{?with_kde:--with-kde} \
+	%{?with_gtk:--with-gtk} \
+	%{?with_gnome:--with-gnome} \
+	%{?with_glut:--with-glut} \
 	--disable-rpath \
-	--with-kde \
-	--without-gtk \
 	--with-lua \
 	--with-xinerama \
 	--with-qt-dir=%{_libdir}
 
-%{__make} ACLOCAL="%{__aclocal} -I macros"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	kde_htmldir=%{_kdedocdir}
+	kde_htmldir=%{_kdedocdir} \
+	appsdir=%{_desktopdir}/kde
 
 # desktop/icon
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
-install src/celestia/gtk/data/celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}
+%{!?with_kde:install src/celestia/kde/data/celestia.desktop $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop}
+install src/celestia/kde/data/hi48-app-celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
 
 %find_lang %{name} --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with gnome}
+%post
+%gconf_schema_install celestia.schemas
+
+%preun
+%gconf_schema_uninstall celestia.schemas
+%endif
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README AUTHORS TODO controls.txt ChangeLog manual/
+%doc README AUTHORS TODO controls.txt ChangeLog
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/celestia
-%{_desktopdir}/*
 %{_pixmapsdir}/*
+%if %{with kde}
 %{_datadir}/apps/celestia
 %{_datadir}/config/*
 %{_datadir}/mimelnk/application/*
 %{_datadir}/services/*
-%exclude %{_datadir}/celestia/manual
+%{_iconsdir}/*/*/apps/%{name}.png
+%{_desktopdir}/kde/*
+%else
+%{_desktopdir}/*
+%endif
+%{?with_gnome:%{_sysconfdir}/gconf/schemas/celestia.schemas}
