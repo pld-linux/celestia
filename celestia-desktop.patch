@@ -13,7 +13,7 @@ diff -urN celestia-1.4.1.orig/src/celestia/kde/data/Makefile.am celestia-1.4.1.m
 diff -urN celestia-1.4.1.orig/src/celestia/kde/data/celestia.desktop celestia-1.4.1.mod/src/celestia/kde/data/celestia.desktop
 --- celestia-1.4.1.orig/src/celestia/kde/data/celestia.desktop	2002-12-15 17:58:23.000000000 +0100
 +++ celestia-1.4.1.mod/src/celestia/kde/data/celestia.desktop	2006-06-29 20:59:13.863864750 +0200
-@@ -1,8 +1,12 @@
+@@ -1,8 +1,13 @@
  [Desktop Entry]
 +Encoding=UTF-8
  Name=Celestia
@@ -26,4 +26,5 @@ diff -urN celestia-1.4.1.orig/src/celestia/kde/data/celestia.desktop celestia-1.
  MimeType=application/x-celestia-script
  Type=Application
 +Categories=Qt;KDE;Education;Science;Astronomy;
++DocPath=celestia/index.html
 +# vi: encoding=utf-8
