@@ -1,0 +1,29 @@
+diff -urN celestia-1.4.1.orig/src/celestia/kde/data/Makefile.am celestia-1.4.1.mod/src/celestia/kde/data/Makefile.am
+--- celestia-1.4.1.orig/src/celestia/kde/data/Makefile.am	2006-01-07 12:15:48.000000000 +0100
++++ celestia-1.4.1.mod/src/celestia/kde/data/Makefile.am	2006-06-29 21:00:32.172758750 +0200
+@@ -14,7 +14,7 @@
+ mimedir = $(kde_mimedir)/application
+ mime_DATA = x-celestia-script.desktop
+ 
+-appsdir = $(kde_appsdir)/Edutainment/Science
++appsdir = $(appsdir)
+ apps_DATA = celestia.desktop
+ 
+ KDE_ICON = celestia
+diff -urN celestia-1.4.1.orig/src/celestia/kde/data/celestia.desktop celestia-1.4.1.mod/src/celestia/kde/data/celestia.desktop
+--- celestia-1.4.1.orig/src/celestia/kde/data/celestia.desktop	2002-12-15 17:58:23.000000000 +0100
++++ celestia-1.4.1.mod/src/celestia/kde/data/celestia.desktop	2006-06-29 20:59:13.863864750 +0200
+@@ -1,8 +1,12 @@
+ [Desktop Entry]
++Encoding=UTF-8
+ Name=Celestia
+-Comment=Celestia
++Comment=A real-time visual space simulation
++Comment[pl]=Symulacja przestrzeni kosmicznej w czasie rzeczywistym
+ Exec=celestia %f
+ Terminal=false
+ Icon=celestia.png
+ MimeType=application/x-celestia-script
+ Type=Application
++Categories=Qt;KDE;Education;Science;Astronomy;
++# vi: encoding=utf-8
