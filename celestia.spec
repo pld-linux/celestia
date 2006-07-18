@@ -12,7 +12,7 @@ Summary:	A real-time visual space simulation
 Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.4.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
