@@ -157,8 +157,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mimelnk/application/*
 %{_datadir}/services/*
 %{_iconsdir}/*/*/apps/%{name}.png
-%{_desktopdir}/kde/*
+%{_desktopdir}/kde/*.desktop
 %else
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %endif
 %{?with_gnome:%{_sysconfdir}/gconf/schemas/celestia.schemas}
