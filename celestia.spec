@@ -9,7 +9,7 @@
 %endif
 
 Summary:	A real-time visual space simulation
-Summary(pl):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
+Summary(pl.UTF-8):   Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.4.1
 Release:	2
@@ -81,16 +81,16 @@ scales, from galaxy clusters down to spacecraft only a few meters
 across. A 'point-and-goto' interface makes it simple to navigate
 through the universe to the object you want to visit.
 
-%description -l pl
+%description -l pl.UTF-8
 Celestia to wolny symulator przestrzeni komicznej w czasie
-rzeczywistym, który pozwala do¶wiadczaæ naszego Wszech¶wiata w trzech
-wymiarach. W odró¿nieniu od innych programów planetarnych Celestia nie
-przywi±zuje Ciê do powierzchni ziemi. Mo¿esz podró¿owaæ przez Uk³ad
-S³oneczny do ponad 100,000 gwiazd lub nawet poza galaktykê. Wszystkie
-podró¿e w Celestii s± niezauwa¿alne; funkcja wyk³adniczego
-przybli¿enia pozwala Ci odkrywaæ Kosmos w ró¿nych skalach - od
-spojrzenia na galaktyki do widoku kilkumetrowych statków kosmicznych.
-Interfejs typu 'poka¿-i-leæ' czyni nawigacjê przez Wszech¶wiat prost±.
+rzeczywistym, ktÃ³ry pozwala doÅ›wiadczaÄ‡ naszego WszechÅ›wiata w trzech
+wymiarach. W odrÃ³Å¼nieniu od innych programÃ³w planetarnych Celestia nie
+przywiÄ…zuje CiÄ™ do powierzchni ziemi. MoÅ¼esz podrÃ³Å¼owaÄ‡ przez UkÅ‚ad
+SÅ‚oneczny do ponad 100,000 gwiazd lub nawet poza galaktykÄ™. Wszystkie
+podrÃ³Å¼e w Celestii sÄ… niezauwaÅ¼alne; funkcja wykÅ‚adniczego
+przybliÅ¼enia pozwala Ci odkrywaÄ‡ Kosmos w rÃ³Å¼nych skalach - od
+spojrzenia na galaktyki do widoku kilkumetrowych statkÃ³w kosmicznych.
+Interfejs typu 'pokaÅ¼-i-leÄ‡' czyni nawigacjÄ™ przez WszechÅ›wiat prostÄ….
 
 %prep
 %setup -q
