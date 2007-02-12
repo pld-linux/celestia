@@ -9,7 +9,7 @@
 %endif
 
 Summary:	A real-time visual space simulation
-Summary(pl.UTF-8):   Symulacja przestrzeni kosmicznej w czasie rzeczywistym
+Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.4.1
 Release:	2
