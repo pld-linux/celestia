@@ -12,7 +12,7 @@ Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.5.1
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
@@ -123,6 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir} \
+	kde_libs_htmldir=%{_kdedocdir} \
 	appsdir=%{_desktopdir}/kde
 
 # desktop/icon
@@ -130,7 +131,7 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 %{!?with_kde:install src/celestia/kde/data/celestia.desktop $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop}
 install src/celestia/kde/data/hi48-app-celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
 
-%find_lang %{name} --with-kde
+%find_lang %{name} --all-name --with-kde
 
 %clean
 rm -rf $RPM_BUILD_ROOT
