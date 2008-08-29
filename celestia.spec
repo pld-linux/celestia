@@ -11,17 +11,16 @@
 Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.4.1
-Release:	2
+Version:	1.5.1
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-# Source0-md5:	be1d36fc97a13b9a276249dbc0efac41
-Patch0:		%{name}-lua50.patch
-Patch1:		%{name}-makefile.patch
-Patch2:		%{name}-gcc4.patch
-Patch3:		%{name}-extras.patch
-Patch4:		%{name}-desktop.patch
+# Source0-md5:	df6854a2cf62d2e96612398c13b68fd2
+Patch0:		%{name}-as-needed.patch
+Patch1:		%{name}-gcc43.patch
+Patch2:		%{name}-extras.patch
+Patch3:		%{name}-desktop.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
@@ -94,11 +93,10 @@ Interfejs typu 'pokaż-i-leć' czyni nawigację przez Wszechświat prostą.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 # ugly hack not to require GConf2-devel if we're not building gnome version
 %{!?with_gnome:sed -i "s#AM_GCONF_SOURCE_2##g" configure.in}
