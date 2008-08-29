@@ -1,0 +1,13 @@
+--- src/celestia/Makefile.am~	2008-04-23 22:17:06.000000000 +0100
++++ src/celestia/Makefile.am	2008-08-26 16:05:51.000000000 +0100
+@@ -7,8 +7,8 @@
+ 
+ if ENABLE_KDE
+ SUBDIRS += kde
+-celestiaKDELIBS = $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI) $(LIB_KFILE) \
+-                  $(LIBSOCKET) kde/libkdegui.a
++celestiaKDELIBS = kde/libkdegui.a $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI) $(LIB_KFILE) \
++                  $(LIBSOCKET) 
+ celestia_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+ endif
+ 
