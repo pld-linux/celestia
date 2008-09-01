@@ -12,7 +12,7 @@ Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
 Version:	1.5.1
-Release:	0.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
@@ -23,9 +23,9 @@ Patch2:		%{name}-extras.patch
 Patch3:		%{name}-desktop.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-devel
+%{?with_glut:BuildRequires:	OpenGL-glut-devel >= 4.0}
 BuildRequires:	autoconf
 BuildRequires:	automake
-%{?with_glut:BuildRequires:	glut-devel >= 3.7}
 %if %{with gtk} || %{with gnome}
 BuildRequires:	cairo-devel
 BuildRequires:	gtk+2-devel >= 2.6
@@ -82,14 +82,15 @@ through the universe to the object you want to visit.
 
 %description -l pl.UTF-8
 Celestia to wolny symulator przestrzeni komicznej w czasie
-rzeczywistym, który pozwala doświadczać naszego Wszechświata w trzech
-wymiarach. W odróżnieniu od innych programów planetarnych Celestia nie
-przywiązuje Cię do powierzchni ziemi. Możesz podróżować przez Układ
-Słoneczny do ponad 100,000 gwiazd lub nawet poza galaktykę. Wszystkie
-podróże w Celestii są niezauważalne; funkcja wykładniczego
-przybliżenia pozwala Ci odkrywać Kosmos w różnych skalach - od
-spojrzenia na galaktyki do widoku kilkumetrowych statków kosmicznych.
-Interfejs typu 'pokaż-i-leć' czyni nawigację przez Wszechświat prostą.
+rzeczywistym, który pozwala doświadczać naszego Wszechświata w
+trzech wymiarach. W odróżnieniu od innych programów planetarnych
+Celestia nie przywiązuje Cię do powierzchni ziemi. Możesz
+podróżować przez Układ Słoneczny do ponad 100,000 gwiazd lub
+nawet poza galaktykę. Wszystkie podróże w Celestii są
+niezauważalne; funkcja wykładniczego przybliżenia pozwala Ci
+odkrywać Kosmos w różnych skalach - od spojrzenia na galaktyki do
+widoku kilkumetrowych statków kosmicznych. Interfejs typu
+'pokaż-i-leć' czyni nawigację przez Wszechświat prostą.
 
 %prep
 %setup -q
