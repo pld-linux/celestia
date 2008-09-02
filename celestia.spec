@@ -23,6 +23,7 @@ Patch0:		%{name}-as-needed.patch
 Patch1:		%{name}-gcc43.patch
 Patch2:		%{name}-extras.patch
 Patch3:		%{name}-desktop.patch
+Patch4:		%{name}-lua51.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-GLU-devel
 %{?with_glut:BuildRequires:	OpenGL-glut-devel >= 4.0}
@@ -41,7 +42,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 %{?with_theora:BuildRequires:	libtheora-devel}
 BuildRequires:	libtool
-BuildRequires:	lua50-devel
+BuildRequires:	lua51-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 Requires:	OpenGL
@@ -102,6 +103,7 @@ widoku kilkumetrowych statków kosmicznych. Interfejs typu
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4
 
 # ugly hack not to require GConf2-devel if we're not building gnome version
 %{!?with_gnome:sed -i "s#AM_GCONF_SOURCE_2##g" configure.in}
