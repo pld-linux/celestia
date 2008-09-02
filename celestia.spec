@@ -1,15 +1,14 @@
-
+#
+# Conditional build:
 %bcond_without	kde		# KDE UI as the default one
-%bcond_with	gtk		# use gtk2 UI instead
+%bcond_with	gtk		# use GTK+2 UI instead
 %bcond_with	gnome		# use libgnome2 UI instead
 %bcond_with	glut		# use glut UI instead
-
 %bcond_without	theora		# without theora support
-
+#
 %if %{with gtk} || %{with gnome} || %{with glut}
 %undefine	with_kde
 %endif
-
 Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
@@ -31,7 +30,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 %if %{with gtk} || %{with gnome}
 BuildRequires:	cairo-devel
-BuildRequires:	gtk+2-devel >= 2.6
+BuildRequires:	gtk+2-devel >= 2:2.6
 BuildRequires:	gtkglext-devel
 %endif
 BuildRequires:	gettext-devel
@@ -45,7 +44,6 @@ BuildRequires:	libtool
 BuildRequires:	lua51-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
-Requires:	OpenGL
 # celestia < 1.4 original packages
 Obsoletes:	celestia-extrasolar
 Obsoletes:	celestia-generator
@@ -71,8 +69,6 @@ Obsoletes:	celestia-im-starwars
 Obsoletes:	celestia-pathfinder
 Obsoletes:	celestia-voyager
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreqdep	libGL.so.1 libGLU.so.1 libGLcore.so.1
 
 %description
 Celestia is a free real-time space simulation that lets you experience
