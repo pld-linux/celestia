@@ -831,11 +831,12 @@ diff -Naur celestia-1.5.0-upstream/src/celestia/kde/videocapturedlg.cpp celestia
 diff -Naur celestia-1.5.0-upstream/src/celestia/oggtheoracapture.cpp celestia-1.5.0/src/celestia/oggtheoracapture.cpp
 --- celestia-1.5.0-upstream/src/celestia/oggtheoracapture.cpp	2008-03-01 12:51:20.000000000 +0100
 +++ celestia-1.5.0/src/celestia/oggtheoracapture.cpp	2008-03-01 09:15:02.000000000 +0100
-@@ -66,11 +66,13 @@
+@@ -66,11 +66,14 @@
  #include <celutil/util.h>
  #include "../celengine/gl.h"
  #include <string>
 +#include <cstring>
++#include <ctime>
  #include "theora/theora.h"
  
  using namespace std;
