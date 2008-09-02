@@ -30,10 +30,10 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 %if %{with gtk} || %{with gnome}
 BuildRequires:	cairo-devel
-BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.6
 BuildRequires:	gtkglext-devel
 %endif
+BuildRequires:	gettext-devel
 %{?with_kde:BuildRequires:	kdelibs-devel}
 %{?with_gnome:BuildRequires:	libgnomeui-devel}
 BuildRequires:	libjpeg-devel
