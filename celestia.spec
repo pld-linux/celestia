@@ -4,6 +4,8 @@
 %bcond_with	gnome		# use libgnome2 UI instead
 %bcond_with	glut		# use glut UI instead
 
+%bcond_without	theora		# without theora support
+
 %if %{with gtk} || %{with gnome} || %{with glut}
 %undefine	with_kde
 %endif
@@ -37,6 +39,7 @@ BuildRequires:	gtkglext-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
+%{?with_theora:BuildRequires:	libtheora-devel}
 BuildRequires:	libtool
 BuildRequires:	lua50-devel
 BuildRequires:	pkgconfig
@@ -113,6 +116,7 @@ cp -f /usr/share/automake/config.sub admin
 	%{?with_gnome:--with-gnome} \
 	%{?with_glut:--with-glut} \
 	--disable-rpath \
+	%{!?with_theora:--disable-theora} \
 	--with-lua \
 	--with-xinerama \
 	--with-qt-dir=%{_libdir}
