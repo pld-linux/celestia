@@ -22,7 +22,7 @@ Patch1:		%{name}-gcc43.patch
 Patch2:		%{name}-extras.patch
 Patch3:		%{name}-desktop.patch
 URL:		http://www.shatters.net/celestia/
-BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-GLU-devel
 %{?with_glut:BuildRequires:	OpenGL-glut-devel >= 4.0}
 BuildRequires:	autoconf
 BuildRequires:	automake
