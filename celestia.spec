@@ -118,7 +118,6 @@ cp -f /usr/share/automake/config.sub admin
 	--disable-rpath \
 	%{!?with_theora:--disable-theora} \
 	--with-lua \
-	--with-xinerama \
 	--with-qt-dir=%{_libdir}
 
 %{__make}
