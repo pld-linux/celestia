@@ -33,7 +33,7 @@ BuildRequires:	cairo-devel
 BuildRequires:	gtk+2-devel >= 2:2.6
 BuildRequires:	gtkglext-devel
 %endif
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 %{?with_kde:BuildRequires:	kdelibs-devel}
 %{?with_gnome:BuildRequires:	libgnomeui-devel}
 BuildRequires:	libjpeg-devel
