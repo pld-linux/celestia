@@ -1,0 +1,12 @@
+diff -dur -x '*~' celestia-1.6.1.orig/src/celengine/frametree.h celestia-1.6.1/src/celengine/frametree.h
+--- celestia-1.6.1.orig/src/celengine/frametree.h	2011-06-05 18:11:09.000000000 +0200
++++ celestia-1.6.1/src/celengine/frametree.h	2015-07-10 19:35:49.882049018 +0200
+@@ -49,7 +49,7 @@
+ 
+     bool isRoot() const
+     {
+-        return bodyParent == NULL;
++        return bodyParent == 0;
+     }
+ 
+     bool updateRequired() const

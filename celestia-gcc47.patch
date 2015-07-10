@@ -1,0 +1,11 @@
+diff -dur celestia-1.6.1.orig/src/celmath/intersect.h celestia-1.6.1/src/celmath/intersect.h
+--- celestia-1.6.1.orig/src/celmath/intersect.h	2011-06-05 18:11:15.000000000 +0200
++++ celestia-1.6.1/src/celmath/intersect.h	2015-07-10 18:55:37.912489627 +0200
+@@ -15,6 +15,7 @@
+ #include "ray.h"
+ #include "sphere.h"
+ #include "ellipsoid.h"
++#include "mathlib.h"
+ 
+ 
+ template<class T> bool testIntersection(const Ray3<T>& ray,

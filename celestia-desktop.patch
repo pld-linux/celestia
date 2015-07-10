@@ -1,6 +1,26 @@
-diff -urN celestia-1.4.1.orig/src/celestia/kde/data/Makefile.am celestia-1.4.1.mod/src/celestia/kde/data/Makefile.am
---- celestia-1.4.1.orig/src/celestia/kde/data/Makefile.am	2006-01-07 12:15:48.000000000 +0100
-+++ celestia-1.4.1.mod/src/celestia/kde/data/Makefile.am	2006-06-29 21:00:32.172758750 +0200
+diff -dur -x '*~' -x '*.rej' -x '*.orig' celestia-1.6.1.orig/src/celestia/gtk/data/celestia.desktop celestia-1.6.1/src/celestia/gtk/data/celestia.desktop
+--- celestia-1.6.1.orig/src/celestia/gtk/data/celestia.desktop	2011-06-05 18:11:10.000000000 +0200
++++ celestia-1.6.1/src/celestia/gtk/data/celestia.desktop	2015-07-10 19:01:11.534166719 +0200
+@@ -1,12 +1,13 @@
+ [Desktop Entry]
+ Encoding=UTF-8
+-Version=1.4.0
+ Type=Application
+ Exec=celestia
+ Icon=celestia
+ X-GNOME-DocPath=
+ Terminal=false
+ Name=Celestia
+-Comment=Space Simulator
++Comment=A real-time visual space simulation
++Comment[pl]=Symulacja przestrzeni kosmicznej w czasie rzeczywistym
+ StartupNotify=true
+-Categories=Astronomy;Science;Application;
++Categories=Qt;KDE;Education;Science;Astronomy;
++# vi: encoding=utf-8
+diff -dur -x '*~' -x '*.rej' -x '*.orig' celestia-1.6.1.orig/src/celestia/kde/data/Makefile.am celestia-1.6.1/src/celestia/kde/data/Makefile.am
+--- celestia-1.6.1.orig/src/celestia/kde/data/Makefile.am	2011-06-05 18:11:13.000000000 +0200
++++ celestia-1.6.1/src/celestia/kde/data/Makefile.am	2015-07-10 18:58:02.449884263 +0200
 @@ -14,7 +14,7 @@
  mimedir = $(kde_mimedir)/application
  mime_DATA = x-celestia-script.desktop
@@ -10,9 +30,9 @@ diff -urN celestia-1.4.1.orig/src/celestia/kde/data/Makefile.am celestia-1.4.1.m
  apps_DATA = celestia.desktop
  
  KDE_ICON = celestia
-diff -urN celestia-1.4.1.orig/src/celestia/kde/data/celestia.desktop celestia-1.4.1.mod/src/celestia/kde/data/celestia.desktop
---- celestia-1.4.1.orig/src/celestia/kde/data/celestia.desktop	2002-12-15 17:58:23.000000000 +0100
-+++ celestia-1.4.1.mod/src/celestia/kde/data/celestia.desktop	2006-06-29 20:59:13.863864750 +0200
+diff -dur -x '*~' -x '*.rej' -x '*.orig' celestia-1.6.1.orig/src/celestia/kde/data/celestia.desktop celestia-1.6.1/src/celestia/kde/data/celestia.desktop
+--- celestia-1.6.1.orig/src/celestia/kde/data/celestia.desktop	2011-06-05 18:11:13.000000000 +0200
++++ celestia-1.6.1/src/celestia/kde/data/celestia.desktop	2015-07-10 18:58:59.646838368 +0200
 @@ -1,8 +1,14 @@
  [Desktop Entry]
 +Encoding=UTF-8

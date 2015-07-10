@@ -1,33 +1,38 @@
 #
 # Conditional build:
-%bcond_without	kde		# KDE UI as the default one
-%bcond_with	gtk		# use GTK+2 UI instead
+%bcond_with	kde		# KDE3 UI as the default one
+%bcond_without	gtk		# use GTK+2 UI instead
 %bcond_with	gnome		# use libgnome2 UI instead
 %bcond_with	glut		# use glut UI instead
 %bcond_without	theora		# without theora support
 #
-%if %{with gtk} || %{with gnome} || %{with glut}
-%undefine	with_kde
+%if %{with kde} || %{with gnome} || %{with glut}
+%undefine	with_gtk
 %endif
 Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.5.1
+Version:	1.6.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-# Source0-md5:	df6854a2cf62d2e96612398c13b68fd2
-Patch0:		%{name}-as-needed.patch
-Patch1:		%{name}-gcc43.patch
-Patch2:		%{name}-extras.patch
-Patch3:		%{name}-desktop.patch
-Patch4:		%{name}-lua51.patch
+# Source0-md5:	02208982a431b984502fac909bf380f4
+Patch0:		%{name}-includes.patch
+Patch1:		%{name}-as-needed.patch
+Patch2:		gtk-enable-locales-early.patch
+Patch3:		use-stdint_h.patch
+Patch4:		%{name}-desktop.patch
+Patch5:		%{name}-gcc47.patch
+Patch6:		%{name}-null.patch
+#Patch2:		%{name}-extras.patch
+#Patch4:		%{name}-lua51.patch
 URL:		http://www.shatters.net/celestia/
 BuildRequires:	OpenGL-GLU-devel
 %{?with_glut:BuildRequires:	OpenGL-glut-devel >= 4.0}
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	gettext-tools
 %if %{with gtk} || %{with gnome}
 BuildRequires:	cairo-devel
 BuildRequires:	gtk+2-devel >= 2:2.6
@@ -95,20 +100,29 @@ widoku kilkumetrowych statków kosmicznych. Interfejs typu
 
 %prep
 %setup -q
-%patch0
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 # ugly hack not to require GConf2-devel if we're not building gnome version
 %{!?with_gnome:sed -i "s#AM_GCONF_SOURCE_2##g" configure.in}
 
 %build
-cp -f /usr/share/automake/config.sub admin
-%{__make} -f admin/Makefile.common
+%{__gettextize}
+cp -a po/Makefile* po2/
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 
 %configure \
+	CFLAGS="%{rpmcflags} $(pkg-config --cflags libpng)" \
+	LIBS="-ldl" \
 	%{?with_kde:--with-kde} \
 	%{?with_gtk:--with-gtk} \
 	%{?with_gnome:--with-gnome} \
@@ -134,6 +148,8 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 %{!?with_kde:install src/celestia/kde/data/celestia.desktop $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop}
 install src/celestia/kde/data/hi48-app-celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
 
+rm -r $RPM_BUILD_ROOT%{_localedir}/no
+
 %find_lang %{name} --all-name --with-kde
 
 %clean
@@ -149,7 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README AUTHORS TODO controls.txt ChangeLog
+%doc NEWS README AUTHORS controls.txt ChangeLog
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/celestia
 %{_pixmapsdir}/*
