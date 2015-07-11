@@ -16,7 +16,7 @@ Version:	1.6.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
-Source0:	http://dl.sourceforge.net/celestia/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/celestia/Celestia-source/1.6.1/%{name}-%{version}.tar.gz
 # Source0-md5:	02208982a431b984502fac909bf380f4
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-as-needed.patch
