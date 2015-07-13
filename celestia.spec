@@ -5,7 +5,7 @@
 %bcond_with	gnome		# use libgnome2 UI instead
 %bcond_with	glut		# use glut UI instead
 %bcond_without	theora		# without theora support
-#
+
 %if %{with kde} || %{with gnome} || %{with glut}
 %undefine	with_gtk
 %endif
@@ -16,7 +16,7 @@ Version:	1.6.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
-Source0:	http://downloads.sourceforge.net/celestia/Celestia-source/1.6.1/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
 # Source0-md5:	02208982a431b984502fac909bf380f4
 Patch0:		%{name}-includes.patch
 Patch1:		%{name}-as-needed.patch
@@ -88,15 +88,14 @@ through the universe to the object you want to visit.
 
 %description -l pl.UTF-8
 Celestia to wolny symulator przestrzeni komicznej w czasie
-rzeczywistym, który pozwala doświadczać naszego Wszechświata w
-trzech wymiarach. W odróżnieniu od innych programów planetarnych
-Celestia nie przywiązuje Cię do powierzchni ziemi. Możesz
-podróżować przez Układ Słoneczny do ponad 100,000 gwiazd lub
-nawet poza galaktykę. Wszystkie podróże w Celestii są
-niezauważalne; funkcja wykładniczego przybliżenia pozwala Ci
-odkrywać Kosmos w różnych skalach - od spojrzenia na galaktyki do
-widoku kilkumetrowych statków kosmicznych. Interfejs typu
-'pokaż-i-leć' czyni nawigację przez Wszechświat prostą.
+rzeczywistym, który pozwala doświadczać naszego Wszechświata w trzech
+wymiarach. W odróżnieniu od innych programów planetarnych Celestia nie
+przywiązuje Cię do powierzchni ziemi. Możesz podróżować przez Układ
+Słoneczny do ponad 100,000 gwiazd lub nawet poza galaktykę. Wszystkie
+podróże w Celestii są niezauważalne; funkcja wykładniczego
+przybliżenia pozwala Ci odkrywać Kosmos w różnych skalach - od
+spojrzenia na galaktyki do widoku kilkumetrowych statków kosmicznych.
+Interfejs typu 'pokaż-i-leć' czyni nawigację przez Wszechświat prostą.
 
 %prep
 %setup -q
@@ -146,7 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 # desktop/icon
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 %{!?with_kde:install src/celestia/kde/data/celestia.desktop $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop}
-install src/celestia/kde/data/hi48-app-celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
+cp -p src/celestia/kde/data/hi48-app-celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
 
 rm -r $RPM_BUILD_ROOT%{_localedir}/no
 
