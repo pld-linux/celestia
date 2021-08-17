@@ -1,26 +1,16 @@
-diff -dur -x '*~' -x '*.rej' -x '*.orig' celestia-1.6.1.orig/src/celestia/gtk/data/celestia.desktop celestia-1.6.1/src/celestia/gtk/data/celestia.desktop
---- celestia-1.6.1.orig/src/celestia/gtk/data/celestia.desktop	2011-06-05 18:11:10.000000000 +0200
-+++ celestia-1.6.1/src/celestia/gtk/data/celestia.desktop	2015-07-10 19:01:11.534166719 +0200
-@@ -1,12 +1,13 @@
- [Desktop Entry]
- Encoding=UTF-8
--Version=1.4.0
- Type=Application
- Exec=celestia
- Icon=celestia
- X-GNOME-DocPath=
- Terminal=false
- Name=Celestia
--Comment=Space Simulator
-+Comment=A real-time visual space simulation
+--- Celestia-1.6.2/src/celestia/gtk/data/celestia.desktop~	2020-11-06 23:34:57.000000000 +0000
++++ Celestia-1.6.2/src/celestia/gtk/data/celestia.desktop	2021-08-17 07:09:49.377162127 +0000
+@@ -9,5 +9,7 @@
+ Name=Celestia (Gtk+)
+ GenericName=Space Simulator
+ Comment=Explore the Universe in this detailed space simulation
 +Comment[pl]=Symulacja przestrzeni kosmicznej w czasie rzeczywistym
  StartupNotify=true
--Categories=Astronomy;Science;Application;
+-Categories=Astronomy;Education;Application;
 +Categories=Qt;KDE;Education;Science;Astronomy;
 +# vi: encoding=utf-8
-diff -dur -x '*~' -x '*.rej' -x '*.orig' celestia-1.6.1.orig/src/celestia/kde/data/Makefile.am celestia-1.6.1/src/celestia/kde/data/Makefile.am
---- celestia-1.6.1.orig/src/celestia/kde/data/Makefile.am	2011-06-05 18:11:13.000000000 +0200
-+++ celestia-1.6.1/src/celestia/kde/data/Makefile.am	2015-07-10 18:58:02.449884263 +0200
+--- Celestia-1.6.2/src/celestia/kde/data/Makefile.am~	2020-11-06 23:34:57.000000000 +0000
++++ Celestia-1.6.2/src/celestia/kde/data/Makefile.am	2021-08-17 07:12:45.142135370 +0000
 @@ -14,7 +14,7 @@
  mimedir = $(kde_mimedir)/application
  mime_DATA = x-celestia-script.desktop
@@ -30,9 +20,8 @@ diff -dur -x '*~' -x '*.rej' -x '*.orig' celestia-1.6.1.orig/src/celestia/kde/da
  apps_DATA = celestia.desktop
  
  KDE_ICON = celestia
-diff -dur -x '*~' -x '*.rej' -x '*.orig' celestia-1.6.1.orig/src/celestia/kde/data/celestia.desktop celestia-1.6.1/src/celestia/kde/data/celestia.desktop
---- celestia-1.6.1.orig/src/celestia/kde/data/celestia.desktop	2011-06-05 18:11:13.000000000 +0200
-+++ celestia-1.6.1/src/celestia/kde/data/celestia.desktop	2015-07-10 18:58:59.646838368 +0200
+--- Celestia-1.6.2/src/celestia/kde/data/celestia.desktop~	2020-11-06 23:34:57.000000000 +0000
++++ Celestia-1.6.2/src/celestia/kde/data/celestia.desktop	2021-08-17 07:15:26.860041315 +0000
 @@ -1,8 +1,14 @@
  [Desktop Entry]
 +Encoding=UTF-8

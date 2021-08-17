@@ -12,22 +12,15 @@
 Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.6.1
+Version:	1.6.2
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
-Source0:	http://downloads.sourceforge.net/celestia/%{name}-%{version}.tar.gz
-# Source0-md5:	02208982a431b984502fac909bf380f4
-Patch0:		%{name}-includes.patch
-Patch1:		%{name}-as-needed.patch
-Patch2:		gtk-enable-locales-early.patch
-Patch3:		use-stdint_h.patch
-Patch4:		%{name}-desktop.patch
-Patch5:		%{name}-gcc47.patch
-Patch6:		%{name}-null.patch
-#Patch2:		%{name}-extras.patch
-#Patch4:		%{name}-lua51.patch
-URL:		http://www.shatters.net/celestia/
+Source0:	https://github.com/CelestiaProject/Celestia/archive/refs/tags/%{version}.tar.gz
+# Source0-md5:	604434b1d99b7ac1b51a4933c04a652b
+Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-null.patch
+URL:		https://celestia.space
 BuildRequires:	OpenGL-GLU-devel
 %{?with_glut:BuildRequires:	OpenGL-glut-devel >= 4.0}
 BuildRequires:	autoconf
@@ -46,7 +39,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 %{?with_theora:BuildRequires:	libtheora-devel}
 BuildRequires:	libtool
-BuildRequires:	lua51-devel
+BuildRequires:	lua53-devel
 BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 # celestia < 1.4 original packages
@@ -98,17 +91,9 @@ spojrzenia na galaktyki do widoku kilkumetrowych statków kosmicznych.
 Interfejs typu 'pokaż-i-leć' czyni nawigację przez Wszechświat prostą.
 
 %prep
-%setup -q
+%setup -q -n Celestia-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-
-# ugly hack not to require GConf2-devel if we're not building gnome version
-%{!?with_gnome:sed -i "s#AM_GCONF_SOURCE_2##g" configure.in}
 
 %build
 %{__gettextize}
