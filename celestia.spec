@@ -12,12 +12,12 @@
 Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.6.2
+Version:	1.6.3
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	https://github.com/CelestiaProject/Celestia/archive/refs/tags/%{version}.tar.gz
-# Source0-md5:	604434b1d99b7ac1b51a4933c04a652b
+# Source0-md5:	f3bf8a7c51a799fbd9a263f5b2c80aeb
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-null.patch
 URL:		https://celestia.space
@@ -131,8 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 %{!?with_kde:install src/celestia/kde/data/celestia.desktop $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop}
 cp -p src/celestia/kde/data/hi48-app-celestia.png $RPM_BUILD_ROOT%{_pixmapsdir}/celestia.png
-
-rm -r $RPM_BUILD_ROOT%{_localedir}/no
 
 %find_lang %{name} --all-name --with-kde
 
