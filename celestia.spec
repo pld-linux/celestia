@@ -12,12 +12,12 @@
 Summary:	A real-time visual space simulation
 Summary(pl.UTF-8):	Symulacja przestrzeni kosmicznej w czasie rzeczywistym
 Name:		celestia
-Version:	1.6.3
+Version:	1.6.4
 Release:	1
 License:	GPL
 Group:		X11/Applications/Science
 Source0:	https://github.com/CelestiaProject/Celestia/archive/refs/tags/%{version}.tar.gz
-# Source0-md5:	f3bf8a7c51a799fbd9a263f5b2c80aeb
+# Source0-md5:	d4770ffe08cb8761a78bebabcb9067ef
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-null.patch
 URL:		https://celestia.space
